@@ -4,12 +4,19 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
-    "build": "tsc -b && vite build",
+    "start:dev": "vite --host --mode development",
+    "start:prod": "vite --mode production",
+    "start:alpha": "vite --mode alpha",
+    "pre-build": "di-cli pre-build",
+    "build:dev": "yarn pre-build && vite build --mode development",
+    "build:prod": "yarn pre-build && vite build --mode production",
+    "deploy:dev:only": "di-cli pre-build --branch=dev && yarn build:dev && di-cli uploadDir --branch=dev",
+    "deploy": "di-cli uploadDir --branch",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@di-fe/di-cli": "^1.1.6",
     "ahooks": "^3.7.8",
     "amfe-flexible": "^2.2.1",
     "antd-mobile": "^5.39.0",

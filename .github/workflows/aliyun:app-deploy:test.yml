@@ -1,0 +1,38 @@
+name: '阿里云【test】TianOS-H5发布'
+
+on:
+  workflow_dispatch:
+
+env:
+  ALIYUN_REGISTRY_USER: "bayer-di@1919231319209791"
+  ALIYUN_REGISTRY_PWD: "BlRo6xMo%H1U)SDh0&g2jiX}FVkoCfHs"
+
+jobs:
+  deploy:
+    env:
+      OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
+      OSS_SCERET_ACCESS_KEY: ${{ secrets.OSS_SCERET_ACCESS_KEY }}
+    runs-on: ubuntu-latest
+    container:
+      image: registry.cn-hangzhou.aliyuncs.com/bayer-di-pub/di-cli:24-alpine-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: git config --system --add safe.directory /__w/TianOS-H5/TianOS-H5;
+
+      - name: pre-check-cache
+        if: always()
+        run: |
+          di-cli checkCache;
+
+      - name: build-cache
+        if: failure()
+        run: |
+          echo '准备构建&上传缓存...';
+          yarn install --frozen-lockfile;
+          npx di-cli uploadCache;
+
+      - name: build-deploy
+        if: always()
+        run: |
+          di-cli downloadCache;
+          yarn build:dev && yarn deploy;
