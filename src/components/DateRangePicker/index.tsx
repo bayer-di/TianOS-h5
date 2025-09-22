@@ -274,6 +274,10 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         {/* 日期时间选择器 */}
         <div className="date-range-picker-selector">
           <DatePickerView
+            style={{
+              '--item-height': '42px',
+              '--item-font-size': '14px',
+            }}
             value={tempDate}
             onChange={handleDateChange}
             precision={precision}

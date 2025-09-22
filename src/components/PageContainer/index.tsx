@@ -101,7 +101,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
             block
             type="submit"
             color="primary"
-            size="large"
+            // size="large"
             onClick={onSubmit}
             loading={submitLoading}
             disabled={submitDisabled}

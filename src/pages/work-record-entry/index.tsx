@@ -131,8 +131,6 @@ const WorkRecordEntry: React.FC = () => {
     }
 
     await saveWorkRecord(formData).then(() => {
-      console.log('提交成功')
-      
       // 提交成功后清空表单数据
       form.resetFields()
       // 清空已选择的人员

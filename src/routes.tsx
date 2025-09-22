@@ -8,6 +8,7 @@ import MainLayout from './layouts/MainLayout'
 // const UiDemoPage = lazy(() => import('./pages/ui-demo'))
 const WorkRecordEntryPage = lazy(() => import('./pages/work-record-entry'))
 const EmploySelectPage = lazy(() => import('./pages/employ-select'))
+const ToastTestPage = lazy(() => import('./pages/toast-test'))
 
 // 加载中组件
 const LoadingPage: React.FC = () => (
@@ -39,6 +40,14 @@ const routes: RouteObject[] = [
         element: (
           <Suspense>
             <EmploySelectPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'toast-test',
+        element: (
+          <Suspense>
+            <ToastTestPage />
           </Suspense>
         ),
       },

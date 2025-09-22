@@ -64,15 +64,21 @@
     }
     
     .employ-select-content {
-      flex: 1;
+      height: 100%;
       display: flex;
       padding: 12px 14px;
-      // overflow: hidden;
+      overflow: hidden;
       
       .position-list {
+        // background-color: green;
         width: 120px;
+        height: 100%;
         overflow-y: auto;
         // border-right: 1px solid #eee;
+
+        .adm-list-body {
+          border: none;
+        }
         
         .adm-list-item {
           padding: 10px 12px;
@@ -101,6 +107,7 @@
       
       .employee-list-container {
         flex: 1;
+        height: 100%;
         display: flex;
         flex-direction: column;
         background-color: #fff;
@@ -127,7 +134,7 @@
         }
         
         .employee-list {
-          flex: 1;
+          height: 100%;
           overflow-y: auto;
 
           .adm-list-body {
@@ -148,6 +155,7 @@
         }
         
         .select-actions {
+          z-index: 1;
           display: flex;
           justify-content: space-between;
           height: 40px;
@@ -162,7 +170,6 @@
             align-items: center;
             color: var(--primary-color);
             @include font-body-m;
-            font-size: $font-size-s;
 
             &:first-child {
               color: var(--gray-9);

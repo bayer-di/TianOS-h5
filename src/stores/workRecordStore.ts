@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { Toast } from 'antd-mobile'
+import { Toast } from '../utils/toast'
 import { persist } from 'zustand/middleware'
 import type { WorkRecordForm, IWorkTypeGroup, IBlockLevel, IPlantingArea, IWorkType } from '../types/workRecord'
 import type { IEmployee } from './employeeStore'
@@ -141,18 +141,13 @@ export const useWorkRecordStore = create<WorkRecordState>()(
       // 保存作业记录
       saveWorkRecord: async (data) => {
         await asyncFetch(() => workRecordApi.saveWorkRecord(data), {
-          // onSuccess: (res) => {
-          //   console.log('res---saveWorkRecord', res)
-          //   // set({ isSubmitting: false })
-          // },
-          // onError: (errMessage) => {
-          //   // Toast.show({
-          //   //   icon: 'fail',
-          //   //   content: parseMessage(errMessage)
-          //   // })
-          //   console.log('errMessage---saveWorkRecord', parseMessage(errMessage))
-          //   // set({ isSubmitting: false, error: errMessage })
-          // }
+          // loadingSuccessMsg: '提交',
+          onSuccess: () => {
+            Toast.success('提交成功')
+          },
+          onError: (errMessage) => {
+            Toast.fail(parseMessage(errMessage))
+          }
         })
       },
       

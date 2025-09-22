@@ -40,6 +40,7 @@ const EmploySelect: React.FC = () => {
   // 组件加载时获取职位列表
   useEffect(() => {
     fetchPositions(baseId)
+    setFilter({ baseId: baseId })
   }, [baseId])
   
   // 处理员工选择
@@ -68,8 +69,10 @@ const EmploySelect: React.FC = () => {
         title="人员选择"
         showBack={true}
         onBack={handleBack}
-        // showSubmit={true}
-        // onSubmit={handleConfirm}
+        showSubmit={true}
+        onSubmit={handleConfirm}
+        submitText={`确定${selectedEmployees.length > 0 ? `(${selectedEmployees.length})` : ''}`}
+        submitDisabled={selectedEmployees.length === 0}
       >
         <div className="employ-select-container">
           {/* 搜索框 */}
@@ -101,7 +104,6 @@ const EmploySelect: React.FC = () => {
             
             {/* 右侧员工列表区域 */}
             <div className="employee-list-container">
-              {/* 打卡状态Tab */}
               <div className="employee-tabs">
                 <Tabs
                   activeKey={filter.clockIn?.toString()}
@@ -113,7 +115,6 @@ const EmploySelect: React.FC = () => {
                 </Tabs>
               </div>
               
-              {/* 右侧员工列表 */}
               <div className="employee-list">
                 {isLoading ? (
                   <div className="loading-container">加载中...</div>
@@ -138,7 +139,6 @@ const EmploySelect: React.FC = () => {
                 )}
               </div>
               
-              {/* 选择操作 */}
               <div className="select-actions">
                 <span className="action-text" onClick={unselectAllEmployees}>取消选择</span>
                 <span className="action-text" onClick={selectAllEmployees}>选择全部</span>
@@ -147,7 +147,7 @@ const EmploySelect: React.FC = () => {
           </div>
           
           {/* 底部确认按钮 */}
-          <div className="bottom-actions">
+          {/* <div className="bottom-actions">
             <CButton
               block
               color="primary"
@@ -157,7 +157,7 @@ const EmploySelect: React.FC = () => {
             >
               确定{selectedEmployees.length > 0 ? `(${selectedEmployees.length})` : ''}
             </CButton>
-          </div>
+          </div> */}
         </div>
       </PageContainer>
     </div>

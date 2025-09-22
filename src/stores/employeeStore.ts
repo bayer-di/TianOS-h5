@@ -1,7 +1,8 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { employeeApi } from '../services/employee'
 import { ClockIn } from '../types/employee'
+import { asyncFetch } from '../utils/common'
+import { employeeApi } from '../services/employee'
 import type { IPosition } from '../types/employee'
 import type { IEmployeeFilter } from '../types/employee'
 
@@ -52,7 +53,6 @@ export const useEmployeeStore = create<EmployeeState>()(
       selectedEmployees: [],
       currentPositionId: 0,
       filter: {
-        baseId: 21, // 默认基地ID
         clockIn: ClockIn.ALL,
         keywords: '',
       },
@@ -107,20 +107,15 @@ export const useEmployeeStore = create<EmployeeState>()(
       // 选择当前筛选条件下的所有员工
       selectAllEmployees: () => {
         set((state) => {
-          const { filter, employees } = state
+          const { employees } = state
           
-          // 获取当前筛选条件下的员工
-          const filteredEmployees = employees.filter(emp => {
-            if (filter.clockIn === ClockIn.ALL) return true
-            return emp.clockIn === filter.clockIn
-          })
           
           // 合并已选和当前筛选条件下的员工
           const newSelectedEmployees = [
             ...state.selectedEmployees.filter(selected => 
-              !filteredEmployees.some(emp => emp.id === selected.id)
+              !employees.some(emp => emp.id === selected.id)
             ),
-            ...filteredEmployees
+            ...employees
           ]
           
           // 更新员工选中状态
@@ -139,17 +134,12 @@ export const useEmployeeStore = create<EmployeeState>()(
       // 取消选择当前筛选条件下的所有员工
       unselectAllEmployees: () => {
         set((state) => {
-          const { filter, employees } = state
+          const { employees } = state
           
-          // 获取当前筛选条件下的员工
-          const filteredEmployees = employees.filter(emp => {
-            if (filter.clockIn === ClockIn.ALL) return true
-            return emp.clockIn === filter.clockIn
-          })
           
           // 从已选中列表中移除当前筛选条件下的员工
           const newSelectedEmployees = state.selectedEmployees.filter(selected => 
-            !filteredEmployees.some(emp => emp.id === selected.id)
+            !employees.some(emp => emp.id === selected.id)
           )
           
           // 更新员工选中状态
@@ -175,28 +165,14 @@ export const useEmployeeStore = create<EmployeeState>()(
       
       // 获取职位列表
       fetchPositions: async (baseId) => {
-        set({ isLoading: true, error: null })
-        try {
-          const res = await employeeApi.getPositionList(baseId)
-          if (res && res.data) {
-            set({ 
-              positions: res.data,
-              currentPositionId: res.data.length > 0 ? res.data[0].id : 0,
-              isLoading: false 
-            })
-            
-            // 获取职位后自动获取员工列表
+        await asyncFetch(() => employeeApi.getPositionList(baseId), {
+          onSuccess: (res) => {
+            set({ positions: res.data, currentPositionId: res.data.length > 0 ? res.data[0].id : 0 })
             if (res.data.length > 0) {
               get().fetchEmployees()
             }
           }
-        } catch (error) {
-          console.error('Failed to fetch positions:', error)
-          set({ 
-            isLoading: false, 
-            error: '获取职位列表失败' 
-          })
-        }
+        })
       },
       
       // 获取员工列表
@@ -205,28 +181,21 @@ export const useEmployeeStore = create<EmployeeState>()(
         
         if (!currentPositionId) return
         
-        set({ isLoading: true, error: null })
-        try {
-          const res = await employeeApi.getEmployeeList({
-            ...filter,
-            positionId: currentPositionId,
-          })
-          
-          if (res && res.data) {
-            // 处理员工数据，标记已选中的员工
-            const employeeList = res.data.map((emp: IEmployee) => {
-              const isSelected = selectedEmployees.some(selected => selected.id === emp.id)
-              return { ...emp, isSelected }
-            })
-            set({ employees: employeeList, isLoading: false })
+        await asyncFetch(() => employeeApi.getEmployeeList({
+          ...filter,
+          clockIn: filter.clockIn === ClockIn.ALL ? undefined : filter.clockIn,
+          positionId: currentPositionId,
+        }), {
+          onSuccess: (res) => {
+            if (res && res.data) {
+              const employeeList = res.data.map((emp: IEmployee) => {
+                const isSelected = selectedEmployees.some(selected => selected.id === emp.id)
+                return { ...emp, isSelected }
+              })
+              set({ employees: employeeList, isLoading: false })
+            }
           }
-        } catch (error) {
-          console.error('Failed to fetch employees:', error)
-          set({ 
-            isLoading: false, 
-            error: '获取员工列表失败' 
-          })
-        }
+        })
       }
     }),
     {
