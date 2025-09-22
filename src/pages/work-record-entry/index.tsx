@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { 
-  Form,
+  Form
 } from 'antd-mobile'
 import CForm from '../../components/CForm'
 import Field from '../../components/Field'
@@ -130,7 +130,16 @@ const WorkRecordEntry: React.FC = () => {
       zoneId: Number(res.zoneId[res.zoneId.length - 1]),
     }
 
-    await saveWorkRecord(formData)
+    await saveWorkRecord(formData).then(() => {
+      console.log('提交成功')
+      
+      // 提交成功后清空表单数据
+      form.resetFields()
+      // 清空已选择的人员
+      useEmployeeStore.getState().clearSelectedEmployees()
+      // 重置workRecordStore中的表单数据
+      useWorkRecordStore.getState().resetForm()
+    })
   }
 
   return (

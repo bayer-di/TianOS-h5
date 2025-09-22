@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { CheckOutline } from 'antd-mobile-icons'
 import { CIcon} from '../../components/CIcon'
-import { SearchBar, Tabs, List, Toast } from 'antd-mobile'
+import { SearchBar, Tabs, List } from 'antd-mobile'
 import { ClockIn } from '../../types/employee'
 import { useEmployeeStore } from '../../stores'
 import CButton from '../../components/CButton'
@@ -62,16 +61,6 @@ const EmploySelect: React.FC = () => {
   const handleBack = () => {
     navigate(-1)
   }
-  
-  // 显示错误信息
-  useEffect(() => {
-    if (error) {
-      Toast.show({
-        icon: 'fail',
-        content: error
-      })
-    }
-  }, [error])
   
   return (
     <div className="page-employ-select">

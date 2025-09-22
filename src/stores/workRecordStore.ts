@@ -141,17 +141,18 @@ export const useWorkRecordStore = create<WorkRecordState>()(
       // 保存作业记录
       saveWorkRecord: async (data) => {
         await asyncFetch(() => workRecordApi.saveWorkRecord(data), {
-          onSuccess: (res) => {
-            // set({ isSubmitting: false })
-          },
-          onError: (errMessage) => {
-            Toast.show({
-              icon: 'fail',
-              content: parseMessage(errMessage)
-            })
-            console.log('errMessage---saveWorkRecord', parseMessage(errMessage))
-            // set({ isSubmitting: false, error: errMessage })
-          }
+          // onSuccess: (res) => {
+          //   console.log('res---saveWorkRecord', res)
+          //   // set({ isSubmitting: false })
+          // },
+          // onError: (errMessage) => {
+          //   // Toast.show({
+          //   //   icon: 'fail',
+          //   //   content: parseMessage(errMessage)
+          //   // })
+          //   console.log('errMessage---saveWorkRecord', parseMessage(errMessage))
+          //   // set({ isSubmitting: false, error: errMessage })
+          // }
         })
       },
       
