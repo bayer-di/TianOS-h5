@@ -1,0 +1,7 @@
+.c-text-area {
+  @include font-body-m;
+//   color: $gray-5;
+  padding: 10px 12px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+}

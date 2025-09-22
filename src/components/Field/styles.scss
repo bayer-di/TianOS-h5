@@ -1,0 +1,72 @@
+.c-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  padding: 0 12px;
+  background-color: #fff;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &:hover:not(.c-field--disabled) {
+    border-color: #d0d0d0;
+  }
+  
+  &--active:not(.c-field--disabled) {
+    border-color: #1677ff;
+  }
+  
+  &--disabled {
+    background-color: $gray-10;
+    cursor: not-allowed;
+    
+    .c-field__content {
+      color: $gray-7;
+    }
+    .c-field__icon {
+      color: $gray-7;
+    }
+  }
+  
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include font-body-m;
+    &--placeholder {
+      color: $gray-5;
+    }
+  }
+  
+  &__suffix {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+  }
+  
+  &__clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    color: #ccc;
+    font-size: 16px;
+    
+  }
+  
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    transition: transform 0.3s;
+    
+    &--active {
+      transform: rotate(180deg);
+    }
+  }
+}

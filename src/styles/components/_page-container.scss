@@ -1,0 +1,36 @@
+@use '../core' as *;
+
+/* 页面容器组件样式 */
+.page-container {
+  height: 100vh;
+  width: 100vw;
+  // width: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &__content {
+    height: 100%;
+  }
+  
+  &__footer {
+    padding: $spacing-s $spacing-m;
+    background-color: $white;
+  }
+  
+  &__submit {
+    padding: $spacing-s $spacing-m;
+    background-color: $white;
+    
+    .adm-button {
+      height: 44px;
+      @include font-body-m;
+      background-color: $primary-color;
+      border-radius: $border-radius-m;
+
+      
+      &--loading::before {
+        margin-right: $spacing-xs;
+      }
+    }
+  }
+}

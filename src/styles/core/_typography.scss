@@ -1,0 +1,166 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+/* 排版样式 */
+
+// 标题
+h1, .h1 {
+  @include font-title-xxl;
+  margin-bottom: $spacing-md;
+}
+
+h2, .h2 {
+  @include font-title-xl;
+  margin-bottom: $spacing-sm;
+}
+
+h3, .h3 {
+  @include font-title-l;
+  margin-bottom: $spacing-sm;
+}
+
+h4, .h4 {
+  @include font-title-m;
+  margin-bottom: $spacing-xs;
+}
+
+h5, .h5 {
+  @include font-title-s;
+  margin-bottom: $spacing-xs;
+}
+
+h6, .h6 {
+  font-size: $font-size-s;
+  line-height: $line-height-s;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-xs;
+}
+
+// 正文
+.text-body {
+  @include font-body-m;
+}
+
+.text-body-small {
+  @include font-body-s;
+}
+
+.text-caption {
+  @include font-caption;
+}
+
+// 文本对齐
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+// 文本变换
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+// 文本样式
+.text-bold {
+  font-weight: $font-weight-bold;
+}
+
+.text-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.text-medium {
+  font-weight: $font-weight-medium;
+}
+
+.text-regular {
+  font-weight: $font-weight-regular;
+}
+
+.text-light {
+  font-weight: $font-weight-light;
+}
+
+// 文本颜色
+.text-primary {
+  color: $primary-color;
+}
+
+.text-secondary {
+  color: $secondary-color;
+}
+
+.text-success {
+  color: $success-color;
+}
+
+.text-warning {
+  color: $warning-color;
+}
+
+.text-error {
+  color: $error-color;
+}
+
+.text-muted {
+  color: $text-color-secondary;
+}
+
+.text-disabled {
+  color: $text-color-disabled;
+}
+
+// 文本装饰
+.text-underline {
+  text-decoration: underline;
+}
+
+.text-line-through {
+  text-decoration: line-through;
+}
+
+.text-no-decoration {
+  text-decoration: none;
+}
+
+// 文本溢出
+.text-truncate {
+  @include ellipsis(1);
+}
+
+.text-truncate-2 {
+  @include ellipsis(2);
+}
+
+.text-truncate-3 {
+  @include ellipsis(3);
+}
+
+// 响应式文本大小
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    .text-#{$breakpoint}-left { text-align: left; }
+    .text-#{$breakpoint}-center { text-align: center; }
+    .text-#{$breakpoint}-right { text-align: right; }
+    .text-#{$breakpoint}-justify { text-align: justify; }
+  }
+}

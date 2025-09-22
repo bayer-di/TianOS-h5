@@ -1,0 +1,83 @@
+import axios, { type AxiosRequestConfig, type AxiosResponse, type AxiosError } from 'axios'
+import { useUserStore } from '../stores';
+
+// 创建axios实例
+const http = axios.create({
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+
+// 请求拦截器
+http.interceptors.request.use(
+  (config) => {
+    // 从状态管理获取token
+    const token = useUserStore.getState().token
+    
+    // 如果有token则添加到请求头
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+
+// 响应拦截器
+http.interceptors.response.use(
+  (response) => {
+    // 直接返回数据
+    return response.data;
+  },
+  async (error: AxiosError) => {
+    if (error.response) {
+      const { status } = error.response
+      
+      // 处理401未授权错误
+      if (status === 401) {
+        // 清除用户信息
+        useUserStore.getState().logout()
+        // 可以在这里添加重定向到登录页的逻辑
+      }
+      
+      // 处理其他错误
+      const errorMessage = (error.response?.data as any)?.message || '请求失败'
+      console.error(`请求错误 ${status}: ${errorMessage}`)
+    } else if (error.request) {
+      // 请求发出但没有收到响应
+      console.error('网络错误，请检查您的网络连接')
+    } else {
+      // 请求配置出错
+      console.error(`请求错误: ${error.message}`)
+    }
+    
+    return Promise.reject(error)
+  }
+)
+
+// 封装GET请求
+export const get = <T = any>(url: string, params?: any, config?: AxiosRequestConfig): Promise<T> => {
+  return http.get(url, { params, ...config })
+}
+
+// 封装POST请求
+export const post = <T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
+  return http.post(url, data, config)
+}
+
+// 封装PUT请求
+export const put = <T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
+  return http.put(url, data, config)
+}
+
+// 封装DELETE请求
+export const del = <T = any>(url: string, config?: AxiosRequestConfig): Promise<T> => {
+  return http.delete(url, config)
+}
+
+export default http

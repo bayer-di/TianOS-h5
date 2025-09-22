@@ -1,0 +1,102 @@
+@use '../core' as *;
+
+/* 工作记录录入页样式 */
+.page-work-record-entry {
+  height: 100%;
+
+  .adm-form {
+    --border-inner: none;
+    --border-top: none;
+    --border-bottom: none;
+    --prefix-width: 0;
+    padding: 16px 14px;
+
+    .adm-list-item {
+      padding-left: 0;
+    }
+
+    .adm-list-item-content {
+      padding-right: 0;
+
+      &-main {
+        width: 100%;
+        overflow: hidden;
+
+        .adm-form-item-label {
+          // --adm-color-weak: var($gray-2);
+          // --adm-font-size-7: var($font-size-s);
+          color: $gray-2;
+          @include font-body-m;
+          margin-bottom: 4px;
+        }
+
+        .adm-form-item-child {
+          width: 100%;
+
+          &.adm-form-item-child-position-normal > * {
+            width: 100%;
+
+            @include font-body-m;
+          }
+        }
+      }
+    }
+
+    .required-field {
+      
+      .adm-form-item-label {
+        margin-left: 10px;
+      }
+      .adm-form-item-required-asterisk {
+        color: $flamingo-4;
+      }
+    }
+
+    .adm-form-item-feedback-error {
+      @include font-body-s;
+      color: $flamingo-4;
+    }
+  }
+  
+  // 提交按钮样式
+  // .page-container__submit {
+  //   padding: 16px;
+  //   background-color: #fff;
+    
+  //   .adm-button {
+  //     border-radius: 4px;
+  //     height: 44px;
+  //     font-size: 16px;
+  //     font-weight: 500;
+  //     background-color: #1677ff;
+      
+  //     &:not(.adm-button-disabled):active {
+  //       background-color: darken(#1677ff, 10%);
+  //     }
+  //   }
+  // }
+  
+  // 底部指示器
+  // .bottom-indicator {
+  //   width: 40px;
+  //   height: 5px;
+  //   background-color: #d9d9d9;
+  //   border-radius: 2.5px;
+  //   margin: 10px auto 20px;
+  // }
+  
+  // 覆盖antd-mobile样式
+  :global {
+    // .adm-text-area {
+    //   --font-size: 14px;
+    //   --color: #333;
+    //   --placeholder-color: #999;
+    // }
+    
+    // .adm-input {
+    //   --font-size: 14px;
+    //   --color: #333;
+    //   --placeholder-color: #999;
+    // }
+  }
+}

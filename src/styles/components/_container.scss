@@ -1,0 +1,21 @@
+@use '../core' as *;
+
+/* 容器组件样式 */
+.c-container {
+  @include container;
+  
+  &--fluid {
+    max-width: none;
+  }
+  
+  &--padded {
+    padding: $spacing-md;
+  }
+  
+  &--centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

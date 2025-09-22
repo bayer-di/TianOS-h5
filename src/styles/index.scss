@@ -1,0 +1,29 @@
+/**
+ * TianOS-h5 样式主入口文件
+ */
+
+// 导入核心样式
+@use 'core';
+
+// 导入组件样式
+@use 'components';
+
+// 导入布局样式
+@use 'layouts';
+
+// 导入页面样式
+@use 'pages';
+
+// 全局应用样式
+.app {
+  min-height: 100vh;
+  background-color: var(--bg-color, core.$bg-color);
+  color: var(--text-primary, core.$text-primary);
+  transition: all 0.3s;
+}
+
+// 页面基础样式
+.page {
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}

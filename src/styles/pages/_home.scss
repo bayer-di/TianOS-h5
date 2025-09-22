@@ -1,0 +1,56 @@
+@use '../core' as *;
+
+/* 首页样式 */
+.page-home {
+  .banner {
+    height: 200px;
+    background-color: var(--primary-bg-color, $primary-bg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-md;
+    border-radius: $border-radius-m;
+    overflow: hidden;
+    
+    @include respond-to('md') {
+      height: 300px;
+    }
+  }
+  
+  .features {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+    
+    @include respond-to('sm') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include respond-to('md') {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    &__item {
+      padding: $spacing-md;
+      background-color: var(--bg-color, $bg-color);
+      border-radius: $border-radius-m;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      
+      &-icon {
+        margin-bottom: $spacing-sm;
+        color: var(--primary-color, $primary-color);
+      }
+      
+      &-title {
+        margin-bottom: $spacing-xs;
+        font-weight: $font-weight-medium;
+      }
+      
+      &-desc {
+        color: var(--text-color-secondary, $text-color-secondary);
+        font-size: $font-size-s;
+      }
+    }
+  }
+}

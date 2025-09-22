@@ -1,0 +1,156 @@
+@use 'variables' as *;
+@use 'sass:map';
+@use 'sass:list';
+
+/* 响应式工具类 */
+
+// 显示/隐藏类
+@each $breakpoint, $width in $breakpoints {
+  // 在特定断点以下隐藏
+  .hide-below-#{$breakpoint} {
+    @media (max-width: $width - 1) {
+      display: none !important;
+    }
+  }
+  
+  // 在特定断点以上隐藏
+  .hide-above-#{$breakpoint} {
+    @media (min-width: $width) {
+      display: none !important;
+    }
+  }
+  
+  // 仅在特定断点显示
+  .show-only-#{$breakpoint} {
+    display: none !important;
+    
+    @if $breakpoint == 'xs' {
+      @media (max-width: map.get($breakpoints, 'sm') - 1) {
+        display: block !important;
+      }
+    } @else if $breakpoint == 'xxl' {
+      @media (min-width: map.get($breakpoints, 'xxl')) {
+        display: block !important;
+      }
+    } @else {
+      $next-breakpoint-key: null;
+      $breakpoint-keys: map.keys($breakpoints);
+      $current-index: list.index($breakpoint-keys, $breakpoint);
+      $next-index: $current-index + 1;
+      
+      @if $next-index <= list.length($breakpoint-keys) {
+        $next-breakpoint-key: list.nth($breakpoint-keys, $next-index);
+      }
+      
+      @media (min-width: map.get($breakpoints, $breakpoint)) and (max-width: map.get($breakpoints, $next-breakpoint-key) - 1) {
+        display: block !important;
+      }
+    }
+  }
+}
+
+// 特定显示/隐藏类（兼容性写法）
+.hide-xs {
+  @media (max-width: 575px) {
+    display: none !important;
+  }
+}
+
+.hide-sm {
+  @media (min-width: 576px) and (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+.hide-md {
+  @media (min-width: 768px) and (max-width: 991px) {
+    display: none !important;
+  }
+}
+
+.hide-lg {
+  @media (min-width: 992px) and (max-width: 1199px) {
+    display: none !important;
+  }
+}
+
+.hide-xl {
+  @media (min-width: 1200px) and (max-width: 1599px) {
+    display: none !important;
+  }
+}
+
+.hide-xxl {
+  @media (min-width: 1600px) {
+    display: none !important;
+  }
+}
+
+/* 横竖屏适配 */
+.hide-portrait {
+  @media (orientation: portrait) {
+    display: none !important;
+  }
+}
+
+.hide-landscape {
+  @media (orientation: landscape) {
+    display: none !important;
+  }
+}
+
+.show-portrait {
+  @media (orientation: landscape) {
+    display: none !important;
+  }
+}
+
+.show-landscape {
+  @media (orientation: portrait) {
+    display: none !important;
+  }
+}
+
+/* 安全区域适配 */
+.safe-area-top {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-left {
+  padding-left: constant(safe-area-inset-left);
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-area-right {
+  padding-right: constant(safe-area-inset-right);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* 容器类 */
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $spacing-md;
+  padding-left: $spacing-md;
+  
+  @each $breakpoint, $width in $container-max-widths {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      max-width: $width;
+    }
+  }
+}
+
+.container-fluid {
+  width: 100%;
+  padding-right: $spacing-md;
+  padding-left: $spacing-md;
+  margin-right: auto;
+  margin-left: auto;
+}

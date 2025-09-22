@@ -1,0 +1,182 @@
+// 颜色系统
+// 灰色系列
+$gray-1: #111111;
+$gray-2: #2B2B2B;
+$gray-3: #454545;
+$gray-4: #5E5E5E;
+$gray-5: #787878;
+$gray-6: #929292;
+$gray-7: #ACACAC;
+$gray-8: #C5C5C5;
+$gray-9: #DFDFDF;
+$gray-10: #F5F5F5;
+$gray-11: #FAFAFA;
+
+// 蓝色系列
+$blue-1: #00275C;
+$blue-2: #003680;
+$blue-3: #004098;
+$blue-4: #1856AC;
+$blue-5: #306CBF;
+$blue-6: #5687CB;
+$blue-7: #7CA2D7;
+$blue-8: #A1BDE4;
+$blue-9: #C7D8F0;
+$blue-10: #EDF3FC;
+
+// 绿色系列
+$green-1: #0A5B07;
+$green-2: #12770F;
+$green-3: #278C23;
+$green-4: #46A342;
+$green-5: #59B456;
+$green-6: #76C274;
+$green-7: #93D192;
+$green-8: #B1DFAF;
+$green-9: #CEEECD;
+$green-10: #EBFCEB;
+
+// 黄色系列
+$yellow-1: #795B00;
+$yellow-2: #9F7500;
+$yellow-3: #C69100;
+$yellow-4: #E4A700;
+$yellow-5: #EBB521;
+$yellow-6: #EEC248;
+$yellow-7: #F2CF70;
+$yellow-8: #F5DC97;
+$yellow-9: #F9E9BF;
+$yellow-10: #FCF6E6;
+
+// 火烈鸟色系列
+$flamingo-1: #782510;
+$flamingo-2: #A32F12;
+$flamingo-3: #C73D1A;
+$flamingo-4: #E0552B;
+$flamingo-5: #E96841;
+$flamingo-6: #ED805F;
+$flamingo-7: #F29C82;
+$flamingo-8: #F6B8A6;
+$flamingo-9: #FBD4C9;
+$flamingo-10: #FFF0EC;
+
+// 白色
+$white: #fff;
+$black: #000;
+
+// 字体大小
+$font-size-xxl: 40px;
+$font-size-xl: 32px;
+$font-size-l: 20px;
+$font-size-m: 16px;
+$font-size-s: 14px;
+$font-size-mini: 12px;
+
+// 行高
+$line-height-xxl: 48px;
+$line-height-xl: 40px;
+$line-height-l: 28px;
+$line-height-m: 24px;
+$line-height-s: 22px;
+$line-height-mini: 20px;
+
+// 字重
+$font-weight-bold: 700;
+$font-weight-semibold: 600;
+$font-weight-medium: 500;
+$font-weight-regular: 400;
+$font-weight-light: 300;
+
+// 圆角
+$border-radius-xl: 10000px;
+$border-radius-l: 16px;
+$border-radius-m: 8px;
+$border-radius-s: 4px;
+$border-radius-mini: 2px;
+$border-radius: 4px; // 通用圆角
+
+// 主题色
+$primary-color: $blue-4;
+$primary-color-hover: $blue-5;
+$primary-bg-color: $blue-10;
+$secondary-color: #722ed1;
+
+// 辅助色 错误
+$error-color: $flamingo-4;
+$error-color-hover: $flamingo-5;
+$error-bg-color: $flamingo-10;
+
+// 辅助色 警告
+$warning-color: $yellow-4;
+$warning-bg-color: $yellow-10;
+
+// 辅助色 成功
+$success-color: $green-4;
+$success-bg-color: $green-10;
+
+// 文字颜色
+$text-color: $gray-1;
+$text-color-secondary: $gray-5;
+$text-color-disabled: $gray-7;
+$text-primary: rgba(0, 0, 0, 0.85);
+$text-secondary: rgba(0, 0, 0, 0.65);
+$text-disabled: rgba(0, 0, 0, 0.45);
+
+// 边框分割线
+$border-color: $gray-9;
+
+// 背景色/hover
+$bg-light-color: $white;
+$bg-light-color-hover: $gray-11;
+$bg-gray-color: $gray-11;
+$bg-gray-color-hover: $gray-10;
+$bg-active: $gray-11;
+$bg-disabled: $gray-10;
+$bg-page-color: $gray-10;
+$bg-color: $white;
+$bg-color-light: $gray-10;
+
+// 间距
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-ss: 10px;
+$spacing-s: 12px;
+$spacing-m: 14px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// 字体相关
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+// 断点定义
+$breakpoints: (
+  'xs': 375px,  // 小型手机
+  'sm': 576px,  // 大型手机
+  'md': 768px,  // 平板
+  'lg': 992px,  // 小型桌面
+  'xl': 1200px, // 大型桌面
+  'xxl': 1600px // 超大桌面
+);
+
+// 容器最大宽度
+$container-max-widths: (
+  'xs': 100%,
+  'sm': 540px,
+  'md': 720px,
+  'lg': 960px,
+  'xl': 1140px,
+  'xxl': 1320px
+);
+
+// z-index层级管理
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+
+$form-item-height: 42px;

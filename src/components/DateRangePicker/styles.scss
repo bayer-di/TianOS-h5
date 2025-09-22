@@ -1,0 +1,175 @@
+.date-range-picker {
+  width: 100%;
+  
+  // 旧的字段样式
+  &-field {
+    width: 100%;
+  }
+  
+  // 新的自定义字段样式
+  &-custom-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    
+    &--disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background-color: $gray-10;
+    }
+    
+    &__content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+      margin-right: 8px;
+    }
+    
+    &__start, &__end {
+      flex: 1;
+      @include font-body-m;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    &__separator {
+      padding: 0 8px;
+      color: #999;
+      flex-shrink: 0;
+    }
+    
+    &__actions {
+      display: flex;
+      align-items: center;
+    }
+    
+    &__clear {
+      margin-right: 8px;
+      color: #ccc;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+    }
+    
+    &__icon {
+      font-size: 20px;
+      color: $gray-1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  
+  &-placeholder {
+    color: $gray-5;
+  }
+  
+  // 头部显示区域
+  &-header {
+    width: 100%;
+  }
+  
+  &-tabs {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $border-color;
+  }
+  
+  &-tab {
+    flex: 1;
+    padding: 12px 0;
+    text-align: center;
+    @include font-body-m;
+    cursor: pointer;
+    position: relative;
+    
+    &.active {
+      // color: $primary-color;
+      // font-weight: $font-weight-medium;
+      
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40%;
+        height: 2px;
+        background-color: $primary-color;
+      }
+    }
+    
+    &-separator {
+      color: $gray-1;
+      @include font-body-m;
+      padding: 0 2px;
+      flex-shrink: 0;
+    }
+  }
+
+  &-selector {
+    padding: 10px 0;
+  }
+  
+  &-view {
+    width: 100%;
+    height: 100%;
+
+    
+    :global {
+      .adm-picker-view-column {
+        // font-size: 16px;
+      }
+      
+      .adm-picker-view-column-item {
+        height: 42px !important;
+        &-active {
+          color: $primary-color;
+          font-weight: $font-weight-medium;
+        }
+      }
+    }
+  }
+  
+  &-footer {
+    padding: 16px 14px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  &-confirm {
+    width: 100%;
+    height: 44px;
+    background-color: $primary-color;
+    font-size: 16px;
+    border-radius: $border-radius;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: $primary-color-hover;
+    }
+  }
+  
+  // 弹窗样式
+  &-popup {
+    .c-triple-layout__content {
+      display: flex;
+
+      .date-range-picker-selector {
+        height: 100%;
+      }
+    }
+  }
+}

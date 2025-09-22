@@ -1,0 +1,202 @@
+@use '../core' as *;
+
+.page-employ-select {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  .employ-select-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: $gray-10;
+    
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      color: #999;
+      font-size: 14px;
+    }
+    
+    .search-bar-wrapper {
+      padding: 12px 14px 0;
+      .adm-search-bar {
+        --height: 42px;
+        --border-radius: 4px;
+        --adm-color-fill-content: #fff;
+        --padding-left: 0;
+
+        .adm-search-bar-input-box {
+          border: 1px solid $border-color;
+          padding: 0 0 0 12px;
+          box-sizing: border-box;
+          .adm-search-bar-input-box-icon {
+            --adm-font-size-8: 16px;
+            --adm-color-light: $gray-5;
+          }
+
+        }
+      }
+      // padding: 12px 16px;
+      // background-color: var(--adm-color-background);
+    }
+    
+    .adm-list-item {
+      @include font-body-m;
+
+      .adm-list-item-content {
+        padding: 0;
+        border-top: none;
+
+        &-main {
+          padding: 0;
+        }
+
+      }
+      
+      &.active-position {
+        background-color: #fff;
+        color: var(--primary-color);
+        // border-left: 3px solid var(--primary-color);
+      }
+    }
+    
+    .employ-select-content {
+      flex: 1;
+      display: flex;
+      padding: 12px 14px;
+      // overflow: hidden;
+      
+      .position-list {
+        width: 120px;
+        overflow-y: auto;
+        // border-right: 1px solid #eee;
+        
+        .adm-list-item {
+          padding: 10px 12px;
+          background-color: $gray-10;
+          // @include font-body-m;
+
+          // .adm-list-item-content {
+          //   padding: 0;
+          //   border-top: none;
+
+          //   &-main {
+          //     padding: 0;
+          //   }
+
+          // }
+          
+          &.active-position {
+            background-color: #fff;
+            color: var(--primary-color);
+            border-left: 3px solid var(--primary-color);
+          }
+        }
+      }
+      
+      .employee-list-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        border-radius: 10px;
+        
+        .employee-tabs {
+          .adm-tabs {
+            --active-line-color: var(--primary-color);
+            --active-title-color: var(--primary-color);
+            --adm-color-border: var($gray-1);
+            --title-font-size:var($font-size-mini);
+            box-shadow: 0 4px 8px 0 rgba(17, 17, 17, 0.04);
+            z-index: 1;
+            
+            .adm-tabs-tab-wrapper {
+              padding: 0 16px;
+            }
+
+            .adm-tabs-tab {
+              @include font-title-mini;
+              height: 40px;
+            }
+          }
+        }
+        
+        .employee-list {
+          flex: 1;
+          overflow-y: auto;
+
+          .adm-list-body {
+            border: none;
+
+            .adm-list-item {
+              padding: 12px 14px;
+
+              &.active-employee {
+                color: var(--primary-color);
+              }
+              
+            }
+          }
+          
+        }
+        
+        .select-actions {
+          display: flex;
+          justify-content: space-between;
+          height: 40px;
+          padding: 0 10px;
+          @include font-body-m;
+          // border-top: 1px solid #eee;
+          box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.04);
+          .action-text {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-color);
+
+            &:first-child {
+              color: var(--gray-9);
+            }
+
+          }
+        }
+      }
+    }
+    
+    .bottom-actions {
+      padding: 12px 16px;
+      background-color: #fff;
+      border-top: 1px solid #eee;
+      
+      .confirm-button {
+        font-size: 16px;
+        height: 44px;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+// 作业记录录入页面中的人员选择样式
+.page-work-record-entry {
+  .personnel-selector-wrapper {
+    background-color: #f5f5f5;
+    padding: 12px 16px;
+    border-radius: 4px;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+    
+    .selected-personnel {
+      color: #333;
+    }
+    
+    .no-personnel-selected {
+      color: #999;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@use '../core' as *;
+
+/* 登录页样式 */
+.page-login {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-md;
+  background-color: var(--bg-page-color, $bg-page-color);
+  
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    padding: $spacing-lg;
+    background-color: var(--bg-color, $bg-color);
+    border-radius: $border-radius-m;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    &__header {
+      text-align: center;
+      margin-bottom: $spacing-lg;
+      
+      &-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: $spacing-md;
+      }
+      
+      &-title {
+        font-size: $font-size-l;
+        font-weight: $font-weight-medium;
+        margin-bottom: $spacing-xs;
+      }
+      
+      &-subtitle {
+        color: var(--text-color-secondary, $text-color-secondary);
+        font-size: $font-size-s;
+      }
+    }
+    
+    &__footer {
+      margin-top: $spacing-lg;
+      text-align: center;
+      font-size: $font-size-s;
+      color: var(--text-color-secondary, $text-color-secondary);
+      
+      a {
+        color: var(--primary-color, $primary-color);
+      }
+    }
+  }
+}

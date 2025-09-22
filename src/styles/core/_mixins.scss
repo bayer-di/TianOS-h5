@@ -1,0 +1,256 @@
+@use 'variables' as *;
+@use 'sass:map';
+
+// 弹性布局
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+// 居中布局
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 两端对齐布局
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// 绝对定位
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// 固定定位
+@mixin fixed($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: fixed;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// 文本溢出省略号
+@mixin ellipsis($line: 1) {
+  @if $line == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// 响应式断点
+@mixin respond-to($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "未知的断点: #{$breakpoint}";
+  }
+}
+
+// 响应式断点（最大宽度）
+@mixin respond-below($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: map.get($breakpoints, $breakpoint) - 1) {
+      @content;
+    }
+  } @else {
+    @warn "未知的断点: #{$breakpoint}";
+  }
+}
+
+// 响应式断点（范围）
+@mixin respond-between($min, $max) {
+  @if map.has-key($breakpoints, $min) and map.has-key($breakpoints, $max) {
+    @media (min-width: map.get($breakpoints, $min)) and (max-width: map.get($breakpoints, $max) - 1) {
+      @content;
+    }
+  } @else {
+    @warn "未知的断点: #{$min} 或 #{$max}";
+  }
+}
+
+// 清除浮动
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// 容器混合函数
+@mixin container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $spacing-md;
+  padding-left: $spacing-md;
+  
+  @each $breakpoint, $width in $container-max-widths {
+    @include respond-to($breakpoint) {
+      max-width: $width;
+    }
+  }
+}
+
+// 横屏媒体查询
+@mixin landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+// 竖屏媒体查询
+@mixin portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+// 安全区域适配
+@mixin safe-area-inset-top {
+  padding-top: constant(safe-area-inset-top); /* iOS 11.0 */
+  padding-top: env(safe-area-inset-top); /* iOS 11.2+ */
+}
+
+@mixin safe-area-inset-bottom {
+  padding-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
+  padding-bottom: env(safe-area-inset-bottom); /* iOS 11.2+ */
+}
+
+@mixin safe-area-inset-left {
+  padding-left: constant(safe-area-inset-left); /* iOS 11.0 */
+  padding-left: env(safe-area-inset-left); /* iOS 11.2+ */
+}
+
+@mixin safe-area-inset-right {
+  padding-right: constant(safe-area-inset-right); /* iOS 11.0 */
+  padding-right: env(safe-area-inset-right); /* iOS 11.2+ */
+}
+
+// 字体混合
+@mixin font-title-xxl {
+  font-size: $font-size-xxl;
+  line-height: $line-height-xxl;
+  font-weight: $font-weight-semibold;
+}
+
+@mixin font-title-xl {
+  font-size: $font-size-xl;
+  line-height: $line-height-xl;
+  font-weight: $font-weight-semibold;
+}
+
+@mixin font-title-l {
+  font-size: $font-size-l;
+  line-height: $line-height-l;
+  font-weight: $font-weight-semibold;
+}
+
+@mixin font-title-m {
+  font-size: $font-size-m;
+  line-height: $line-height-m;
+  font-weight: $font-weight-medium;
+}
+
+@mixin font-title-s {
+  font-size: $font-size-s;
+  line-height: $line-height-s;
+  font-weight: $font-weight-medium;
+}
+
+@mixin font-title-mini {
+  font-size: $font-size-mini;
+  line-height: $line-height-mini;
+  font-weight: $font-weight-medium;
+}
+
+@mixin font-body-m {
+  font-size: $font-size-m;
+  line-height: $line-height-m;
+  font-weight: $font-weight-regular;
+}
+
+@mixin font-body-s {
+  font-size: $font-size-s;
+  line-height: $line-height-s;
+  font-weight: $font-weight-regular;
+}
+
+@mixin font-caption {
+  font-size: $font-size-mini;
+  line-height: $line-height-mini;
+  font-weight: $font-weight-regular;
+}
+
+// 阴影效果
+@mixin shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+@mixin shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+// 过渡效果
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+// 按钮基础样式
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius;
+  font-weight: $font-weight-medium;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+// 按钮尺寸
+@mixin button-size($padding-y, $padding-x, $font-size) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+}
+
+// 按钮变体
+@mixin button-variant($bg, $color, $hover-bg) {
+  background-color: $bg;
+  color: $color;
+  
+  &:hover {
+    background-color: $hover-bg;
+  }
+  
+  &:active {
+    opacity: 0.8;
+  }
+}

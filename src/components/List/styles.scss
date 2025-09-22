@@ -1,0 +1,101 @@
+@use '../../styles/core' as *;
+
+// List组件样式
+.c-list {
+  width: 100%;
+  background-color: #fff;
+  
+  // 列表头部
+  &__header {
+    padding: 12px 16px;
+    color: $gray-6;
+    font-size: 14px;
+    background-color: $gray-1;
+    
+    // 如果header是空字符串，则不显示padding
+    &:empty {
+      padding: 0;
+    }
+  }
+  
+  // 列表主体
+  &__body {
+    // 空列表时不显示
+    &:empty {
+      display: none;
+    }
+  }
+  
+  // 列表底部
+  &__footer {
+    padding: 12px 16px;
+    color: $gray-5;
+    font-size: 12px;
+    text-align: center;
+    
+    // 如果footer是空字符串，则不显示padding
+    &:empty {
+      padding: 0;
+    }
+  }
+}
+
+// ListItem组件样式
+.c-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid $border-color;
+  background-color: #fff;
+  
+  // 列表项内容
+  &__content {
+    flex: 1;
+    overflow: hidden;
+    @include font-body-m;
+    color: $text-color;
+  }
+  
+  // 列表项额外内容
+  &__extra {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+    color: $gray-5;
+  }
+  
+  // 箭头图标
+  &__arrow {
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid $gray-5;
+    border-right: 1px solid $gray-5;
+    transform: rotate(45deg);
+    margin-left: 4px;
+  }
+  
+  // 可点击状态
+  &--clickable {
+    cursor: pointer;
+    
+    &:active {
+      background-color: $gray-1;
+    }
+  }
+  
+  // 禁用状态
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:active {
+      background-color: #fff;
+    }
+  }
+  
+  // 最后一项去掉底部边框
+  &:last-child {
+    border-bottom: none;
+  }
+}

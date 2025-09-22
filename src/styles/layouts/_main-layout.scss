@@ -1,0 +1,47 @@
+@use '../core' as *;
+
+/* 主布局样式 */
+.l-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  &__header {
+    flex: 0 0 auto;
+  }
+  
+  &__content {
+    flex: 1 0 auto;
+    padding: $spacing-md;
+    background-color: var(--bg-page-color, $bg-page-color);
+  }
+  
+  &__footer {
+    flex: 0 0 auto;
+    padding: $spacing-md;
+    background-color: var(--bg-color, $bg-color);
+    border-top: 1px solid var(--border-color, $border-color);
+  }
+  
+  // 有固定头部时的内容区域
+  &--fixed-header {
+    .l-main__content {
+      padding-top: 56px + $spacing-md;
+    }
+  }
+  
+  // 有固定底部时的内容区域
+  &--fixed-footer {
+    .l-main__content {
+      padding-bottom: 56px + $spacing-md;
+    }
+  }
+  
+  // 安全区域适配
+  &--safe-area {
+    .l-main__content {
+      @include safe-area-inset-top;
+      @include safe-area-inset-bottom;
+    }
+  }
+}

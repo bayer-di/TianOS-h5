@@ -1,0 +1,74 @@
+@use '../core' as *;
+
+/* 导航栏组件样式 */
+.c-nav-bar {
+  display: flex;
+  align-items: center;
+  padding: 0 $spacing-m;
+  background-color: $bg-color ;
+  z-index: $z-index-fixed;
+  position: sticky;
+  top: 0;
+  
+  // &__left {
+  //   flex: 0 0 auto;
+  //   display: flex;
+  //   align-items: center;
+  // }
+
+  .adm-nav-bar-title {
+    flex: 1;
+    text-align: center;
+    @include font-title-m;
+    // margin: 0;
+    // padding: 0 $spacing-md;
+    @include ellipsis(1);
+  }
+  
+  
+  // &__right {
+  //   flex: 0 0 auto;
+  //   display: flex;
+  //   align-items: center;
+  // }
+  
+  // &__back {
+  //   display: flex;
+  //   align-items: center;
+  //   font-size: $font-size-s;
+  //   color: var(--primary-color, $primary-color);
+  //   cursor: pointer;
+    
+  //   &-icon {
+  //     margin-right: $spacing-xs;
+  //   }
+  // }
+  
+  // &__action {
+  //   padding: $spacing-xs;
+  //   color: var(--text-color, $text-color);
+  //   cursor: pointer;
+    
+  //   &:not(:last-child) {
+  //     margin-right: $spacing-xs;
+  //   }
+    
+  //   &:hover {
+  //     color: var(--primary-color, $primary-color);
+  //   }
+  // }
+  
+  // 固定顶部
+  // &--fixed {
+  //   position: fixed;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  // }
+  
+  // 透明背景
+  // &--transparent {
+  //   background-color: transparent;
+  //   box-shadow: none;
+  // }
+}

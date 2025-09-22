@@ -1,0 +1,84 @@
+@use 'variables' as *;
+
+/* 主题系统 */
+
+:root {
+  // 颜色变量
+  --primary-color: #{$primary-color};
+  --primary-color-hover: #{$primary-color-hover};
+  --primary-bg-color: #{$primary-bg-color};
+  --secondary-color: #{$secondary-color};
+  
+  --error-color: #{$error-color};
+  --error-color-hover: #{$error-color-hover};
+  --error-bg-color: #{$error-bg-color};
+  
+  --warning-color: #{$warning-color};
+  --warning-bg-color: #{$warning-bg-color};
+  
+  --success-color: #{$success-color};
+  --success-bg-color: #{$success-bg-color};
+  
+  // 文字颜色
+  --text-color: #{$text-color};
+  --text-color-secondary: #{$text-color-secondary};
+  --text-color-disabled: #{$text-color-disabled};
+  --text-primary: #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --text-disabled: #{$text-disabled};
+  
+  // 边框颜色
+  --border-color: #{$border-color};
+  
+  // 背景色
+  --bg-light-color: #{$bg-light-color};
+  --bg-light-color-hover: #{$bg-light-color-hover};
+  --bg-gray-color: #{$bg-gray-color};
+  --bg-gray-color-hover: #{$bg-gray-color-hover};
+  --bg-active: #{$bg-active};
+  --bg-disabled: #{$bg-disabled};
+  --bg-page-color: #{$bg-page-color};
+  --bg-color: #{$bg-color};
+  --bg-color-light: #{$bg-color-light};
+}
+
+// 深色主题
+.theme-dark {
+  // 颜色变量
+  --primary-color: #{$blue-6};
+  --primary-color-hover: #{$blue-5};
+  --primary-bg-color: #{$blue-1};
+  --secondary-color: #9254de;
+  
+  --error-color: #{$flamingo-6};
+  --error-color-hover: #{$flamingo-5};
+  --error-bg-color: #{$flamingo-1};
+  
+  --warning-color: #{$yellow-6};
+  --warning-bg-color: #{$yellow-1};
+  
+  --success-color: #{$green-6};
+  --success-bg-color: #{$green-1};
+  
+  // 文字颜色
+  --text-color: #{$gray-9};
+  --text-color-secondary: #{$gray-7};
+  --text-color-disabled: #{$gray-5};
+  --text-primary: rgba(255, 255, 255, 0.85);
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-disabled: rgba(255, 255, 255, 0.45);
+  
+  // 边框颜色
+  --border-color: #{$gray-3};
+  
+  // 背景色
+  --bg-light-color: #{$gray-2};
+  --bg-light-color-hover: #{$gray-3};
+  --bg-gray-color: #{$gray-3};
+  --bg-gray-color-hover: #{$gray-4};
+  --bg-active: #{$gray-3};
+  --bg-disabled: #{$gray-4};
+  --bg-page-color: #{$gray-1};
+  --bg-color: #{$gray-2};
+  --bg-color-light: #{$gray-3};
+}

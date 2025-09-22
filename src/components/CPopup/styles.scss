@@ -1,0 +1,36 @@
+.c-popup-body {
+  height: 100%;
+
+  .adm-popup-close-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: $spacing-m;
+    top: $spacing-md;
+    font-weight: 800;
+    @include font-title-m;
+  }
+
+  .c-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+    padding: $spacing-md $spacing-m;
+
+    .c-popup-title {
+      @include font-title-m;
+      // @include text-ellipsis;
+    }
+
+    .c-popup-close {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
