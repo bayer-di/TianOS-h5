@@ -26,30 +26,6 @@ const routes: RouteObject[] = [
     path: '/',
     element: <MainLayout />,
     children: [
-      // {
-      //   index: true,
-      //   element: (
-      //     <Suspense fallback={<LoadingPage />}>
-      //       <HomePage />
-      //     </Suspense>
-      //   ),
-      // },
-      // {
-      //   path: 'login',
-      //   element: (
-      //     <Suspense fallback={<LoadingPage />}>
-      //       <LoginPage />
-      //     </Suspense>
-      //   ),
-      // },
-      // {
-      //   path: 'ui-demo',
-      //   element: (
-      //     <Suspense fallback={<LoadingPage />}>
-      //       <UiDemoPage />
-      //     </Suspense>
-      //   ),
-      // },
       {
         path: 'work-record-entry',
         element: (

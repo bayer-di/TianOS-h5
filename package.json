@@ -13,9 +13,11 @@
     "deploy:dev:only": "di-cli pre-build --branch=dev && yarn build:dev && di-cli uploadDir --branch=dev",
     "deploy": "di-cli uploadDir --branch",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "updateIconFont": "node ./script/updateIconFont.cjs"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.0.2",
     "@di-fe/di-cli": "^1.1.6",
     "ahooks": "^3.7.8",
     "amfe-flexible": "^2.2.1",

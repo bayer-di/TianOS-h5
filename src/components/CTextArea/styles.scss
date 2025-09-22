@@ -1,4 +1,5 @@
 .c-text-area {
+  --font-size: $font-size-s;
   @include font-body-m;
 //   color: $gray-5;
   padding: 10px 12px;

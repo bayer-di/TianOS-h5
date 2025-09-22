@@ -1,7 +1,8 @@
 import React, { type ReactNode } from 'react'
 import cls from 'classnames'
 import _isNil from 'lodash/isNil'
-import { CloseCircleFill, DownOutline, CalendarOutline } from 'antd-mobile-icons'
+import { CloseCircleFill, CalendarOutline } from 'antd-mobile-icons'
+import { CIcon } from '../CIcon'
 import './styles.scss'
 
 export interface FieldProps {
@@ -79,7 +80,7 @@ const Field: React.FC<FieldProps> = ({
         )}
         {(rightIcon || type) ? (
           <div className={cls('c-field__icon', { 'c-field__icon--active': active })}>
-            {rightIcon || (type === 'select' ? <DownOutline /> : (type === 'date' ? <CalendarOutline /> : null))}
+            {rightIcon || (type === 'select' ? <CIcon type="Global_03" size={16} /> : (type === 'date' ? <CalendarOutline /> : null))}
           </div>
         ) : null}
       </div>

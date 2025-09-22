@@ -81,17 +81,6 @@ const WorkRecordEntry: React.FC = () => {
   // 从store中恢复表单数据
   useEffect(() => {
     form.setFieldsValue(formData)
-    // if (formData) {
-    //   // 过滤掉undefined和null值
-    //   const validFormData = Object.entries(formData).reduce((acc, [key, value]) => {
-    //     if (value !== undefined && value !== null) {
-    //       acc[key] = value
-    //     }
-    //     return acc
-    //   }, {} as Record<string, unknown>)
-      
-    //   form.setFieldsValue(validFormData)
-    // }
   }, [formData])
   
   const blockOptions = React.useMemo(() => {
@@ -137,7 +126,7 @@ const WorkRecordEntry: React.FC = () => {
       endTime: workTime?.[1],
       workTypeId: workTypeId
         .filter((v: string) => v.includes('workType_'))
-        .map((v: string) => Number(v.split('_')[1])),
+        .map((v: string) => Number(v.split('_')[1]))?.[0],
       zoneId: Number(res.zoneId[res.zoneId.length - 1]),
     }
 
@@ -274,8 +263,9 @@ const WorkRecordEntry: React.FC = () => {
                   >
                     <CInput 
                       placeholder="请输入" 
-                      min={0} 
-                      type="number" 
+                      min={0}
+                      type="number"
+                      controls={false}
                       className="work-amount-input" 
                       addonAfter={workTypesMap[currentWorkTypeId].pieceUnitName} 
                     />
@@ -301,6 +291,7 @@ const WorkRecordEntry: React.FC = () => {
               className="work-amount-input" 
               addonAfter="小时" 
               min={0}
+              controls={false}
             />
           </Form.Item>
           
@@ -325,7 +316,7 @@ const WorkRecordEntry: React.FC = () => {
               placeholder="请输入" 
               maxLength={100}
               rows={2}
-              showCount
+              // showCount
               className="remarks-textarea"
             />
           </Form.Item>

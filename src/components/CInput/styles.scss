@@ -34,6 +34,7 @@
 }
 
 .adm-input {
+  --font-size: $font-size-s;
   --placeholder-color: #787878;
   @include font-body-m;
 }

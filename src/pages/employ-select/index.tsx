@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { CheckOutline } from 'antd-mobile-icons'
-import { SearchBar, Tabs, List, Button, Toast } from 'antd-mobile'
+import { CIcon} from '../../components/CIcon'
+import { SearchBar, Tabs, List, Toast } from 'antd-mobile'
 import { ClockIn } from '../../types/employee'
 import { useEmployeeStore } from '../../stores'
+import CButton from '../../components/CButton'
 import PageContainer from '../../components/PageContainer'
 
 
@@ -136,7 +138,7 @@ const EmploySelect: React.FC = () => {
                         onClick={() => handleEmployeeSelect(employee)}
                         extra={
                           employee.isSelected && (
-                            <CheckOutline color="#1677ff" />
+                            <CIcon type="Global_15" color="#1856AC" size={20} />
                           )
                         }
                       >
@@ -157,7 +159,7 @@ const EmploySelect: React.FC = () => {
           
           {/* 底部确认按钮 */}
           <div className="bottom-actions">
-            <Button
+            <CButton
               block
               color="primary"
               onClick={handleConfirm}
@@ -165,7 +167,7 @@ const EmploySelect: React.FC = () => {
               disabled={selectedEmployees.length === 0}
             >
               确定{selectedEmployees.length > 0 ? `(${selectedEmployees.length})` : ''}
-            </Button>
+            </CButton>
           </div>
         </div>
       </PageContainer>

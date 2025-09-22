@@ -5,6 +5,8 @@ import cls from 'classnames'
 import dayjs from 'dayjs'
 import { CloseCircleFill, CalendarOutline } from 'antd-mobile-icons'
 import CPopup from '../CPopup'
+import CButton from '../CButton'
+import { CIcon } from '../CIcon'
 import './styles.scss'
 
 export interface DateRangePickerProps {
@@ -199,13 +201,15 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
           <div className="date-range-picker-custom-field__start">
             {getStartTimeText() || <span className="date-range-picker-placeholder">开始时间</span>}
           </div>
-          <div className="date-range-picker-custom-field__separator">-</div>
+          <div className="date-range-picker-custom-field__separator">
+            <CIcon type="Global_51" size={16} />
+          </div>
           <div className="date-range-picker-custom-field__end">
             {getEndTimeText() || <span className="date-range-picker-placeholder">结束时间</span>}
           </div>
         </div>
         <div className="date-range-picker-custom-field__actions">
-          {clearable && !!innerValue && (
+          {clearable && !!innerValue ? (
             <div 
               className="date-range-picker-custom-field__clear" 
               onClick={(e) => {
@@ -215,10 +219,11 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
             >
               <CloseCircleFill />
             </div>
+          ) : (
+            <div className="date-range-picker-custom-field__icon">
+              <CIcon type="Global_48" size={16}/>
+            </div>
           )}
-          <div className="date-range-picker-custom-field__icon">
-            <CalendarOutline />
-          </div>
         </div>
       </div>
       
@@ -235,13 +240,15 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
         title={title}
         footer={
           <div className="date-range-picker-footer">
-            <Button 
+            <CButton 
+              block
+              size="large"
               color="primary"
               className="date-range-picker-confirm" 
               onClick={handleConfirm}
             >
               {confirmText}
-            </Button>
+            </CButton>
           </div>
         }
       >

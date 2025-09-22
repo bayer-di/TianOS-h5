@@ -8,6 +8,7 @@ const CTextArea = (props: TextAreaProps) => {
   return (
     <TextArea
       style={{
+        // '--font-size': '14px',
         '--placeholder-color': '#787878',
       }}
       className={cls('c-text-area', className)}

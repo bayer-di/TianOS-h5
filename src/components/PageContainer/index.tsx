@@ -3,6 +3,7 @@ import cls from 'classnames'
 import CNavBar from '../CNavBar'
 import TripleLayout from '../../layouts/TripleLayout'
 import { Button } from 'antd-mobile'
+import CButton from '../CButton'
 import { useNavigate } from 'react-router-dom'
 
 interface PageContainerProps {
@@ -96,7 +97,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
     if (showSubmit) {
       return (
         <div className={cls('page-container__submit', submitClassName)}>
-          <Button
+          <CButton
             block
             type="submit"
             color="primary"
@@ -106,7 +107,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
             disabled={submitDisabled}
           >
             {submitText}
-          </Button>
+          </CButton>
         </div>
       )
     }

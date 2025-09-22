@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import cls from 'classnames'
-import { DownOutline } from 'antd-mobile-icons'
 import { useMemoizedFn } from 'ahooks'
 import { isEmpty, isEqual } from 'lodash'
-import CPopup from '../CPopup'
 import List from '../List'
-import SelectCard from '../SelectCard'
 import Field from '../Field'
+import CPopup from '../CPopup'
+import CButton from '../CButton'
+import SelectCard from '../SelectCard'
+
 import './styles.scss'
 
 // 选项类型
@@ -218,12 +219,14 @@ const CSelector: React.FC<CSelectorProps> = ({
     
     return (
       <div className="c-selector-footer">
-        <button 
-          className="c-selector-confirm" 
+        <CButton
+          block
+          color="primary"
+          size="large"
           onClick={handleConfirm}
         >
           {confirmText}
-        </button>
+        </CButton>
       </div>
     )
   }, [multiple, confirmText, handleConfirm])
@@ -238,7 +241,6 @@ const CSelector: React.FC<CSelectorProps> = ({
         onClick={handleTriggerClick}
         clearable={clearable && !isEmpty(currentValue) && !(Array.isArray(currentValue) && currentValue.length === 0)}
         onClear={handleClear}
-        rightIcon={<DownOutline />}
         active={visible}
         className="c-selector-field"
       />

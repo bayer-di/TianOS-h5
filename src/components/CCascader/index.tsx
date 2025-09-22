@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { CascaderView } from 'antd-mobile'
 import type { CascaderOption, CascaderValue, CascaderValueExtend } from 'antd-mobile/es/components/cascader-view/cascader-view'
 import cls from 'classnames'
-import CPopup from '../CPopup'
 import Field from '../Field'
-import './styles.scss'
-
+import CPopup from '../CPopup'
+import CButton from '../CButton'
+import { CIcon } from '../CIcon'
 // 级联选择器属性接口
 export interface CCascaderProps {
   value?: CascaderValue[]
@@ -171,11 +171,6 @@ const CCascader: React.FC<CCascaderProps> = ({
         onClick={handleOpen}
         clearable={clearable && value.length > 0}
         onClear={handleClear}
-        // rightIcon={
-        //   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        //     <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        //   </svg>
-        // }
         active={visible}
         className="c-cascader-field"
       />
@@ -184,19 +179,20 @@ const CCascader: React.FC<CCascaderProps> = ({
       <CPopup
         visible={visible}
         onClose={handleClose}
-        // className="c-cascader-popup"
         position="bottom"
         destroyOnClose
         title={title}
         footer={
           showConfirmButton ? (
             <div className="c-cascader-footer">
-              <button 
-                className="c-cascader-confirm" 
+              <CButton
+                color="primary"
+                block
+                size="large"
                 onClick={handleConfirm}
               >
                 确定
-              </button>
+              </CButton>
             </div>
           ) : null
         }
@@ -204,6 +200,7 @@ const CCascader: React.FC<CCascaderProps> = ({
         <div className="c-cascader-container">
           <div className="c-cascader-content">
             <CascaderView
+              activeIcon={<CIcon type="Global_15" color="#1856AC" size={20} />}
               options={options}
               value={innerValue}
               onChange={handleSelect}

@@ -3,13 +3,15 @@
 /* 工作记录录入页样式 */
 .page-work-record-entry {
   height: 100%;
+  background-color: $gray-10;
 
   .adm-form {
     --border-inner: none;
     --border-top: none;
     --border-bottom: none;
     --prefix-width: 0;
-    padding: 16px 14px;
+    --adm-color-background: $gray-10;
+    padding: 16px 14px 0 14px;
 
     .adm-list-item {
       padding-left: 0;
@@ -20,6 +22,7 @@
 
       &-main {
         width: 100%;
+        padding: 0 0 16px 0;
         overflow: hidden;
 
         .adm-form-item-label {
@@ -56,47 +59,9 @@
       @include font-body-s;
       color: $flamingo-4;
     }
-  }
-  
-  // 提交按钮样式
-  // .page-container__submit {
-  //   padding: 16px;
-  //   background-color: #fff;
-    
-  //   .adm-button {
-  //     border-radius: 4px;
-  //     height: 44px;
-  //     font-size: 16px;
-  //     font-weight: 500;
-  //     background-color: #1677ff;
-      
-  //     &:not(.adm-button-disabled):active {
-  //       background-color: darken(#1677ff, 10%);
-  //     }
-  //   }
-  // }
-  
-  // 底部指示器
-  // .bottom-indicator {
-  //   width: 40px;
-  //   height: 5px;
-  //   background-color: #d9d9d9;
-  //   border-radius: 2.5px;
-  //   margin: 10px auto 20px;
-  // }
-  
-  // 覆盖antd-mobile样式
-  :global {
-    // .adm-text-area {
-    //   --font-size: 14px;
-    //   --color: #333;
-    //   --placeholder-color: #999;
-    // }
-    
-    // .adm-input {
-    //   --font-size: 14px;
-    //   --color: #333;
-    //   --placeholder-color: #999;
-    // }
+
+    .work-amount-input, .remarks-textarea {
+      background-color: $white;
+    }
   }
 }

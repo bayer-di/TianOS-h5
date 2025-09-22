@@ -1,6 +1,7 @@
 import React from 'react'
 import cls from 'classnames'
 import { CheckOutline } from 'antd-mobile-icons'
+import { CIcon } from '../CIcon'
 import './styles.scss'
 
 interface SelectCardProps {
@@ -44,7 +45,7 @@ const SelectCard: React.FC<SelectCardProps> = ({
       <span className="c-select-card__label">{label}</span>
       {selected && (
         <span className="c-select-card__icon">
-          {icon || <CheckOutline />}
+          {icon || <CIcon type="Global_15" size={20} color="#1856AC" />}
         </span>
       )}
     </div>

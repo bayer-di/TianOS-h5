@@ -1,0 +1,103 @@
+@use '../../styles/core/variables' as *;
+
+.cButton {
+  @include button-base;
+  @include font-body-m;
+
+  &--primary {
+    @include button-variant($primary-color, $white, $primary-color-hover);
+  }
+
+  &--default {
+    @include button-variant($white, $text-color, $bg-light-color-hover);
+    border: 1px solid $border-color;
+  }
+
+  &--success {
+    @include button-variant($success-color, $white, $success-color);
+      &:hover {
+        opacity: 0.9;
+      }
+  }
+
+  &--warning {
+    @include button-variant($warning-color, $white, $warning-color);
+      &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &--danger {
+    @include button-variant($error-color, $white, $error-color-hover);
+  }
+
+  &--small {
+    @include button-size($spacing-xs, $spacing-sm, $font-size-s);
+    height: 32px;
+  }
+
+  &--middle {
+    @include button-size($spacing-xs, $spacing-md, $font-size-m);
+    height: 40px;
+  }
+
+  &--large {
+    @include button-size($spacing-sm, $spacing-lg, $font-size-s);
+    height: 48px;
+  }
+
+  &--block {
+    display: block;
+    width: 100%;
+  }
+
+  &--round {
+    border-radius: $border-radius-xl;
+  }
+
+  &--ghost {
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    
+    &:hover {
+      background-color: rgba($primary-color, 0.05);
+    }
+  }
+
+  &:disabled, &[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// 覆盖 antd-mobile 按钮样式
+.adm-button {
+  @include font-body-m;
+
+  &--primary {
+    --background-color: $primary-color;
+    --text-color: $white;
+  }
+
+  &--default {
+    --background-color: $white;
+    --text-color: $border-color;
+  }
+
+  &--success {
+    --background-color: $success-color;
+    --text-color: $white;
+  }
+
+  &--warning {
+    --background-color: $warning-color;
+    --text-color: $white;
+  }
+
+  &--danger {
+    --background-color: $error-color;
+    --text-color: $white;
+  }
+}

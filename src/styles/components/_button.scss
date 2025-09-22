@@ -1,122 +1,103 @@
 @use '../core' as *;
 
-/* 按钮组件样式 */
-.c-button {
-  // 基础样式
-  @include button-base;
-  
-  // 元素
-  &__icon {
-    margin-right: var(--spacing-xs, $spacing-xs);
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  &__text {
-    line-height: 1.5;
-  }
-  
-  // 修饰符 - 类型
-  &--primary {
-    background-color: var(--primary-color, $primary-color);
-    color: white;
-    
-    &:hover {
-      background-color: var(--primary-color-hover, $primary-color-hover);
-    }
-    
-    &:active {
-      opacity: 0.8;
-    }
-  }
-  
-  &--secondary {
-    background-color: var(--secondary-color, $secondary-color);
-    color: white;
-    
-    &:hover {
-      opacity: 0.9;
-    }
-    
-    &:active {
-      opacity: 0.8;
-    }
-  }
-  
-  &--outline {
-    border: 1px solid var(--primary-color, $primary-color);
-    color: var(--primary-color, $primary-color);
-    background: transparent;
-    
-    &:hover {
-      background-color: var(--primary-bg-color, $primary-bg-color);
-    }
-    
-    &:active {
-      opacity: 0.8;
-    }
-  }
-  
-  &--text {
-    background: transparent;
-    color: var(--primary-color, $primary-color);
-    
-    &:hover {
-      background-color: var(--primary-bg-color, $primary-bg-color);
-    }
-    
-    &:active {
-      opacity: 0.8;
-    }
-  }
-  
-  // 修饰符 - 尺寸
-  &--small {
-    @include button-size($spacing-xs, $spacing-sm, $font-size-s);
-  }
-  
-  &--medium {
-    @include button-size($spacing-sm, $spacing-md, $font-size-m);
-  }
-  
-  &--large {
-    @include button-size($spacing-md, $spacing-lg, $font-size-l);
-  }
-  
-  // 修饰符 - 状态
-  &--disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-  
-  &--block {
-    display: flex;
-    width: 100%;
-  }
-  
-  &--loading {
-    position: relative;
-    pointer-events: none;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1em;
-      height: 1em;
-      margin: -0.5em 0 0 -0.5em;
-      border: 2px solid currentColor;
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: button-loading-spinner 0.6s linear infinite;
-    }
-  }
-}
+// .cButton {
+//   @include button-base;
+//   @include font-body-m;
 
-@keyframes button-loading-spinner {
-  to {
-    transform: rotate(360deg);
-  }
-}
+//   &--primary {
+//     @include button-variant($primary-color, $white, $primary-color-hover);
+//   }
+
+//   &--default {
+//     @include button-variant($white, $text-color, $bg-light-color-hover);
+//     border: 1px solid $border-color;
+//   }
+
+//   &--success {
+//     @include button-variant($success-color, $white, $success-color);
+//       &:hover {
+//         opacity: 0.9;
+//       }
+//   }
+
+//   &--warning {
+//     @include button-variant($warning-color, $white, $warning-color);
+//       &:hover {
+//       opacity: 0.9;
+//     }
+//   }
+
+//   &--danger {
+//     @include button-variant($error-color, $white, $error-color-hover);
+//   }
+
+//   &--small {
+//     @include button-size($spacing-xs, $spacing-sm, $font-size-s);
+//     height: 32px;
+//   }
+
+//   &--middle {
+//     @include button-size($spacing-xs, $spacing-md, $font-size-m);
+//     height: 40px;
+//   }
+
+//   &--large {
+//     @include button-size($spacing-sm, $spacing-lg, $font-size-m);
+//     height: 48px;
+//   }
+
+//   &--block {
+//     display: block;
+//     width: 100%;
+//   }
+
+//   &--round {
+//     border-radius: $border-radius-xl;
+//   }
+
+//   &--ghost {
+//     background-color: transparent;
+//     border: 1px solid $primary-color;
+//     color: $primary-color;
+    
+//     &:hover {
+//       background-color: rgba($primary-color, 0.05);
+//     }
+//   }
+
+//   &:disabled, &[disabled] {
+//     opacity: 0.6;
+//     cursor: not-allowed;
+//     pointer-events: none;
+//   }
+// }
+
+// // 覆盖 antd-mobile 按钮样式
+// .adm-button {
+//   @include font-body-m;
+
+//   &--primary {
+//     --background-color: $primary-color;
+//     --text-color: $white;
+//   }
+
+//   &--default {
+//     --background-color: $white;
+//     --text-color: $border-color;
+//   }
+
+//   &--success {
+//     --background-color: $success-color;
+//     --text-color: $white;
+//   }
+
+//   &--warning {
+//     --background-color: $warning-color;
+//     --text-color: $white;
+//   }
+
+//   &--danger {
+//     --background-color: $error-color;
+//     --text-color: $white;
+//   }
+// }

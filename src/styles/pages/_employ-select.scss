@@ -77,7 +77,9 @@
         .adm-list-item {
           padding: 10px 12px;
           background-color: $gray-10;
-          // @include font-body-m;
+          color: $gray-5;
+          @include font-body-m;
+          font-size: $font-size-s;
 
           // .adm-list-item-content {
           //   padding: 0;
@@ -133,6 +135,8 @@
 
             .adm-list-item {
               padding: 12px 14px;
+              @include font-body-m;
+              font-size: $font-size-s;
 
               &.active-employee {
                 color: var(--primary-color);
@@ -157,6 +161,8 @@
             justify-content: center;
             align-items: center;
             color: var(--primary-color);
+            @include font-body-m;
+            font-size: $font-size-s;
 
             &:first-child {
               color: var(--gray-9);
@@ -173,30 +179,9 @@
       border-top: 1px solid #eee;
       
       .confirm-button {
-        font-size: 16px;
-        height: 44px;
-        border-radius: 4px;
+        // height: 44px;
+        // border-radius: 4px;
       }
-    }
-  }
-}
-
-// 作业记录录入页面中的人员选择样式
-.page-work-record-entry {
-  .personnel-selector-wrapper {
-    background-color: #f5f5f5;
-    padding: 12px 16px;
-    border-radius: 4px;
-    min-height: 24px;
-    display: flex;
-    align-items: center;
-    
-    .selected-personnel {
-      color: #333;
-    }
-    
-    .no-personnel-selected {
-      color: #999;
     }
   }
 }

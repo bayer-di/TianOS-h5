@@ -21,16 +21,16 @@
     padding: $spacing-s $spacing-m;
     background-color: $white;
     
-    .adm-button {
-      height: 44px;
-      @include font-body-m;
-      background-color: $primary-color;
-      border-radius: $border-radius-m;
+    // .adm-button {
+    //   height: 44px;
+    //   @include font-body-m;
+    //   background-color: $primary-color;
+    //   border-radius: $border-radius-m;
 
       
-      &--loading::before {
-        margin-right: $spacing-xs;
-      }
-    }
+    //   &--loading::before {
+    //     margin-right: $spacing-xs;
+    //   }
+    // }
   }
 }
