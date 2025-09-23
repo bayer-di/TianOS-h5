@@ -1,20 +1,10 @@
 import React from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 
 const MainLayout: React.FC = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
-  
-  // 简单的导航项
-  const navItems = [
-    { path: '/', label: '首页' },
-    { path: '/login', label: '登录' },
-    { path: '/ui-demo', label: 'UI组件' }
-  ];
   
   return (
     <div className="layout-main">
-      {/* 内容区域 */}
       <main className="layout-main-content">
         <Outlet />
       </main>

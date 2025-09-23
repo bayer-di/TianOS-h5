@@ -1,6 +1,6 @@
 import React from 'react'
-import { Toast } from '../utils/toast'
-import CButton from '../components/CButton'
+import { Toast } from '@/utils/toast'
+import CButton from '@/components/CButton'
 
 const ToastTestPage: React.FC = () => {
   const handleShowToast = () => {

@@ -1,24 +1,26 @@
 import React from 'react'
 import cls from 'classnames'
-import { CheckOutline } from 'antd-mobile-icons'
 import { CIcon } from '../CIcon'
 import './styles.scss'
 
 interface SelectCardProps {
-  label: string                   // 显示的文本内容
-  value?: string | number         // 选项的值（可选）
-  selected?: boolean              // 是否选中
-  onClick?: () => void            // 点击事件回调
-  className?: string              // 自定义类名
-  style?: React.CSSProperties     // 自定义样式
-  icon?: React.ReactNode          // 自定义图标（可选）
-  disabled?: boolean              // 是否禁用
+  /** 显示的文本内容 */
+  label: string
+  /** 选项的值（可选） */
+  value?: string | number
+  /** 是否选中 */
+  selected?: boolean
+  onClick?: () => void
+  className?: string
+  style?: React.CSSProperties
+  /** 自定义图标（可选） */
+  icon?: React.ReactNode
+  /** 是否禁用 */
+  disabled?: boolean
 }
 
 const SelectCard: React.FC<SelectCardProps> = ({
   label,
-  // value is included in props but not used directly in the component
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   value,
   selected = false,
   onClick,

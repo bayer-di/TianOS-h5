@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SelectCard from './index'
-import { Space } from 'antd-mobile'
 import { HeartFill } from 'antd-mobile-icons'
 
 const SelectCardDemo = () => {

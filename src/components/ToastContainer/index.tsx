@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { CIcon } from '../CIcon'
-import type { ToastInstance } from '../../contexts/toast-types'
+import type { ToastInstance } from '@/contexts/toast-types'
 import './styles.scss'
 
 // 全局类型声明
@@ -14,8 +14,6 @@ declare global {
     }
   }
 }
-
-
 
 // Toast组件
 const ToastComponent: React.FC<{

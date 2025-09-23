@@ -8,7 +8,6 @@ import CCascader from '../components/CCascader'
 import CButton from '../components/CButton'
 import type { CascaderValue, CascaderValueExtend } from 'antd-mobile/es/components/cascader-view/cascader-view'
 
-
 const UiDemo: React.FC = () => {
   const [selectedWorkType, setSelectedWorkType] = useState<string[]>([])
   const [contentHeight, setContentHeight] = useState<'small' | 'medium' | 'large'>('medium')

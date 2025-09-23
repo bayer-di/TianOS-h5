@@ -1,8 +1,8 @@
 import { useRequest } from 'ahooks'
 import type { Options } from 'ahooks/es/useRequest/src/types'
 
-import type { AsyncFetchHooks } from '../utils/common'
-import { asyncFetch } from '../utils/common'
+import type { AsyncFetchHooks } from '@/utils/common'
+import { asyncFetch } from '@/utils/common'
 
 const useDIRequest = <TData, TParams extends any[]>(
   fn: (...args: TParams) => Promise<TData>,

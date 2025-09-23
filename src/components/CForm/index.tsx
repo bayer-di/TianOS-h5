@@ -1,4 +1,3 @@
-import React from 'react'
 import { Form, type FormProps } from 'antd-mobile'
 
 

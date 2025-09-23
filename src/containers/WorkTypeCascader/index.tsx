@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import cls from 'classnames'
-import CCascader from '../../components/CCascader'
+import CCascader from '@/components/CCascader'
 import type { CascaderOption } from 'antd-mobile/es/components/cascader-view/cascader-view'
-import type { CCascaderProps } from '../../components/CCascader'
-import type { IGroupWorkType } from '../../types/workRecord'
-import { workRecordApi } from '../../services/workRecord'
+import type { CCascaderProps } from '@/components/CCascader'
+import type { IGroupWorkType } from '@/types/workRecord'
+import { workRecordApi } from '@/services/workRecord'
 import './styles.scss'
 
 interface WorkTypeCascaderProps extends Omit<CCascaderProps, 'options'> {

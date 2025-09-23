@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { CIcon} from '../../components/CIcon'
+import { CIcon } from '@/components/CIcon'
 import { SearchBar, Tabs, List } from 'antd-mobile'
-import { ClockIn } from '../../types/employee'
-import { useEmployeeStore } from '../../stores'
-import CButton from '../../components/CButton'
-import PageContainer from '../../components/PageContainer'
+import { ClockIn } from '@/types/employee'
+import { useEmployeeStore } from '@/stores'
+import PageContainer from '@/components/PageContainer'
 
 
 const EmploySelect: React.FC = () => {

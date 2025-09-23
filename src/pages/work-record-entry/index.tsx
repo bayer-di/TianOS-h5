@@ -2,19 +2,19 @@ import React, { useEffect } from 'react'
 import { 
   Form
 } from 'antd-mobile'
-import CForm from '../../components/CForm'
-import Field from '../../components/Field'
-import CInput from '../../components/CInput'
-import CCascader from '../../components/CCascader'
-import CSelector from '../../components/CSelector'
-import CTextArea from '../../components/CTextArea'
-import PageContainer from '../../components/PageContainer'
-import DateRangePicker from '../../components/DateRangePicker'
-import WorkTypeCascader from '../../containers/WorkTypeCascader'
-import { useEmployeeStore } from '../../stores'
-import { useWorkRecordStore } from '../../stores/workRecordStore'
+import CForm from '@/components/CForm'
+import Field from '@/components/Field'
+import CInput from '@/components/CInput'
+import CCascader from '@/components/CCascader'
+import CSelector from '@/components/CSelector'
+import CTextArea from '@/components/CTextArea'
+import PageContainer from '@/components/PageContainer'
+import DateRangePicker from '@/components/DateRangePicker'
+import WorkTypeCascader from '@/containers/WorkTypeCascader'
+import { useEmployeeStore } from '@/stores'
+import { useWorkRecordStore } from '@/stores/workRecordStore'
 import { useNavigate, useLocation } from 'react-router-dom'
-import type { IBlockLevel, WorkRecordForm } from '../../types/workRecord'
+import type { IBlockLevel, WorkRecordForm } from '@/types/workRecord'
 import type { CascaderOption } from 'antd-mobile/es/components/cascader-view/cascader-view'
 
 const WorkRecordEntry: React.FC = () => {
@@ -116,7 +116,6 @@ const WorkRecordEntry: React.FC = () => {
   // 处理表单提交
   const handleSubmit = async () => {
     const res = await form.validateFields()
-    console.log(res,'res')
     const { workTime = [], workTypeId = [], ...rest } = res
     const formData = {
       ...rest,
@@ -272,7 +271,6 @@ const WorkRecordEntry: React.FC = () => {
                       placeholder="请输入" 
                       min={0}
                       type="number"
-                      controls={false}
                       className="work-amount-input" 
                       addonAfter={workTypesMap[currentWorkTypeId].pieceUnitName} 
                     />
@@ -298,7 +296,6 @@ const WorkRecordEntry: React.FC = () => {
               className="work-amount-input" 
               addonAfter="小时" 
               min={0}
-              controls={false}
             />
           </Form.Item>
           

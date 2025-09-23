@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { DatePickerView, Button } from 'antd-mobile'
+import { DatePickerView } from 'antd-mobile'
+import { CloseCircleFill } from 'antd-mobile-icons'
 import type { Precision } from 'antd-mobile/es/components/date-picker/date-picker-utils'
 import cls from 'classnames'
 import dayjs from 'dayjs'
-import { CloseCircleFill, CalendarOutline } from 'antd-mobile-icons'
 import CPopup from '../CPopup'
 import CButton from '../CButton'
 import { CIcon } from '../CIcon'
@@ -76,7 +76,6 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       default: return 'YYYY/MM/DD'
     }
   })()
-  
   // 内部状态
   const [visible, setVisible] = useState(false)
   const [innerValue, setInnerValue] = useState<[number, number] | undefined>(

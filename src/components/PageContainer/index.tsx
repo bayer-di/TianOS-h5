@@ -2,7 +2,6 @@ import React, { type ReactNode } from 'react'
 import cls from 'classnames'
 import CNavBar from '../CNavBar'
 import TripleLayout from '../../layouts/TripleLayout'
-import { Button } from 'antd-mobile'
 import CButton from '../CButton'
 import { useNavigate } from 'react-router-dom'
 
@@ -19,10 +18,6 @@ interface PageContainerProps {
   right?: ReactNode
   /** 底部内容 */
   footer?: ReactNode
-  /** 是否固定顶部 */
-  fixedHeader?: boolean
-  /** 是否固定底部 */
-  fixedFooter?: boolean
   /** 是否适配安全区域 */
   safeArea?: boolean
   /** 自定义类名 */
@@ -55,8 +50,6 @@ const PageContainer: React.FC<PageContainerProps> = ({
   onBack,
   right,
   footer,
-  fixedHeader = true,
-  fixedFooter = true,
   safeArea = true,
   className,
   contentClassName,
@@ -120,8 +113,6 @@ const PageContainer: React.FC<PageContainerProps> = ({
       <TripleLayout
         header={header}
         footer={renderFooter()}
-        fixedHeader={fixedHeader}
-        fixedFooter={fixedFooter && (!!footer || showSubmit)}
         safeArea={safeArea}
         contentClassName={contentClassName}
         contentStyle={contentStyle}
