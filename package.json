@@ -8,9 +8,10 @@
     "start:prod": "vite --mode production",
     "start:alpha": "vite --mode alpha",
     "pre-build": "di-cli pre-build",
-    "build:dev": "yarn pre-build && vite build --mode development",
-    "build:prod": "yarn pre-build && vite build --mode production",
-    "deploy:dev:only": "di-cli pre-build --branch=dev && yarn build:dev && di-cli uploadDir --branch=dev",
+    "build:dev": "rm -rf di-dist && yarn pre-build && vite build --mode development",
+    "build:prod": "rm -rf di-dist && yarn pre-build && vite build --mode production",
+    "deploy:dev:only": "rm -rf di-dist && yarn build:dev && di-cli uploadDir --branch=dev",
+    
     "deploy": "di-cli uploadDir --branch",
     "lint": "eslint .",
     "preview": "vite preview",

@@ -8,31 +8,37 @@ env:
   ALIYUN_REGISTRY_PWD: "BlRo6xMo%H1U)SDh0&g2jiX}FVkoCfHs"
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps: 
+      - run : |
+          # 获取当前分支名称，去除前缀 refs/heads/
+          branch_name="${{ github.ref_name }}"
+          
+          # 不允许部署的分支名称
+          restricted_branches=("master")
+
+          if [[ " ${restricted_branches[*]} " =~ " ${branch_name} " ]]; then
+            echo "WARNING: Deployment to the ${branch_name} branch is not allowed."
+            exit 1
+          else
+            echo "SUCCESS: Deployment is allowed for branch: ${branch_name}."
+          fi
+
   deploy:
+    needs: check
     env:
       OSS_ACCESS_KEY_ID: ${{ secrets.OSS_ACCESS_KEY_ID }}
       OSS_SCERET_ACCESS_KEY: ${{ secrets.OSS_SCERET_ACCESS_KEY }}
     runs-on: ubuntu-latest
+    if: ${{ success() }}
     container:
       image: registry.cn-hangzhou.aliyuncs.com/bayer-di-pub/di-cli:24-alpine-latest
     steps:
       - uses: actions/checkout@v3
-      - run: git config --system --add safe.directory /__w/TianOS-H5/TianOS-H5;
-
-      - name: pre-check-cache
-        if: always()
-        run: |
-          di-cli checkCache;
-
-      - name: build-cache
-        if: failure()
-        run: |
-          echo '准备构建&上传缓存...';
-          yarn install --frozen-lockfile;
-          npx di-cli uploadCache;
+      - run: /usr/bin/git config --system --add safe.directory /__w/TianOS-H5/TianOS-H5;
 
       - name: build-deploy
-        if: always()
         run: |
-          di-cli downloadCache;
+          yarn install --frozen-lockfile;
           yarn build:dev && yarn deploy;

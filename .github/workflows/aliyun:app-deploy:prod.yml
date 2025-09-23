@@ -19,19 +19,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: git config --system --add safe.directory /__w/TianOS-H5/TianOS-H5;
-
-      - name: pre-check-cache
-        if: always()
-        run: |
-          di-cli checkCache;
-
-      - name: build-cache
-        if: failure()
-        run: |
-          echo '准备构建&上传缓存...';
-          yarn install --frozen-lockfile;
-          npx di-cli uploadCache;
-
       - name: build-deploy
         if: always()
         run: |
