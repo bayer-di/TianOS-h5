@@ -18,9 +18,9 @@ jobs:
       image: registry.cn-hangzhou.aliyuncs.com/bayer-di-pub/di-cli:24-alpine-latest
     steps:
       - uses: actions/checkout@v3
-      - run: git config --system --add safe.directory /__w/TianOS-H5/TianOS-H5;
+      - run: git config --system --add safe.directory /__w/TianOS-h5/TianOS-h5;
       - name: build-deploy
         if: always()
         run: |
-          di-cli downloadCache;
+          yarn install --frozen-lockfile;
           yarn build:prod && yarn deploy;

@@ -168,14 +168,14 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
 
   // 获取开始时间显示文本
   const getStartTimeText = () => {
-    if (!innerValue || !innerValue[0]) return ''
-    return dayjs(innerValue[0]).format(formatString)
+    if (!value || !value[0]) return ''
+    return dayjs(value[0]).format(formatString)
   }
   
   // 获取结束时间显示文本
   const getEndTimeText = () => {
-    if (!innerValue || !innerValue[1]) return ''
-    return dayjs(innerValue[1]).format(formatString)
+    if (!value || !value[1]) return ''
+    return dayjs(value[1]).format(formatString)
   }
 
   // 获取最小日期
@@ -209,7 +209,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
           </div>
         </div>
         <div className="date-range-picker-custom-field__actions">
-          {clearable && !!innerValue ? (
+          {clearable && !!value ? (
             <div 
               className="date-range-picker-custom-field__clear" 
               onClick={(e) => {

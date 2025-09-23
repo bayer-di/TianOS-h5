@@ -305,9 +305,10 @@ const WorkRecordEntry: React.FC = () => {
           <Form.Item 
             name="workTime" 
             label="工作时间"
-            initialValue={[now, now]}
+            // initialValue={[now, now]}
           >
             <DateRangePicker 
+              defaultValue={[now, now]}
               title="工作时间"
               clearable 
               // onChange={handleWorkTimeChange}
