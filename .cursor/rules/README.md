@@ -5,6 +5,7 @@
 ## 文档目录
 
 - [项目风格指南](./project-style-guide.md) - 定义项目的代码风格和开发规范
+- [动态路由逻辑](./routes.md) - 提供pages文件下路由的自动注册
 - [组件模板](./component-template.md) - 提供标准组件开发模板和最佳实践
 - [代码审查清单](./code-review-checklist.md) - 代码审查时的检查项目
 - [响应式设计指南](./responsive-design-guide.md) - 移动端适配与响应式设计规范
