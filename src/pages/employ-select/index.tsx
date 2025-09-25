@@ -1,23 +1,19 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CIcon } from '@/components/CIcon'
 import { SearchBar, Tabs, List } from 'antd-mobile'
 import { ClockIn } from '@/types/employee'
 import { useEmployeeStore } from '@/stores'
 import PageContainer from '@/components/PageContainer'
+import { useUrlParams, defaultConverters } from '@/utils/location'
 
 
 const EmploySelect: React.FC = () => {
   const navigate = useNavigate()
-  const location = useLocation()
   
-  const getBaseIdFromUrl = (): number => {
-    const params = new URLSearchParams(location.search)
-    const baseId = params.get('baseId')
-    return Number(baseId)
-  }
-  
-  const baseId = getBaseIdFromUrl()
+  const { baseId } = useUrlParams({
+    baseId: { defaultValue: 0, converter: defaultConverters.number }
+  })
   
   const {
     positions,
@@ -38,8 +34,10 @@ const EmploySelect: React.FC = () => {
   
   // 组件加载时获取职位列表
   useEffect(() => {
-    fetchPositions(baseId)
-    setFilter({ baseId: baseId })
+    if (baseId) {
+      fetchPositions(baseId as number)
+      setFilter({ baseId: baseId as number })
+    }
   }, [baseId])
   
   // 处理员工选择

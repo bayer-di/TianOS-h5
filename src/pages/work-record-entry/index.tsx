@@ -12,23 +12,18 @@ import PageContainer from '@/components/PageContainer'
 import DateRangePicker from '@/components/DateRangePicker'
 import WorkTypeCascader from '@/containers/WorkTypeCascader'
 import { useEmployeeStore } from '@/stores'
+import { useNavigate } from 'react-router-dom'
 import { useWorkRecordStore } from '@/stores/workRecordStore'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useUrlParams, defaultConverters } from '@/utils/location'
 import type { IBlockLevel, WorkRecordForm } from '@/types/workRecord'
 import type { CascaderOption } from 'antd-mobile/es/components/cascader-view/cascader-view'
 
 const WorkRecordEntry: React.FC = () => {
   const navigate = useNavigate()
-  const location = useLocation()
   
-  // 从URL获取baseId参数
-  const getBaseIdFromUrl = () => {
-    const params = new URLSearchParams(location.search)
-    const baseId = params.get('baseId')
-    return Number(baseId)
-  }
-  
-  const baseId = getBaseIdFromUrl()
+  const { baseId } = useUrlParams({
+    baseId: { defaultValue: 0, converter: defaultConverters.number }
+  })
   
   const { selectedEmployees = [] } = useEmployeeStore()
   
@@ -55,10 +50,10 @@ const WorkRecordEntry: React.FC = () => {
   useEffect(() => {
     if (baseId) {
       Promise.all([
-        fetchZones(baseId),
-        fetchAreaMap(baseId),
-        fetchCategories(baseId),
-        fetchWorkTypesAll(baseId)
+        fetchZones(baseId as number),
+        fetchAreaMap(baseId as number),
+        fetchCategories(baseId as number),
+        fetchWorkTypesAll(baseId as number)
       ])
     }
   }, [baseId])
