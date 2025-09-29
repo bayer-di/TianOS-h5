@@ -21,6 +21,15 @@ http.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`
     }
     
+    // 如果数据是FormData类型，则不设置Content-Type，让浏览器自动处理
+    if (config.data instanceof FormData) {
+      // 删除Content-Type，让浏览器自动设置，包括boundary
+      delete config.headers['Content-Type'];
+    } else if (!config.headers['Content-Type']) {
+      // 对于非FormData请求，如果没有设置Content-Type，则设置为application/json
+      config.headers['Content-Type'] = 'application/json';
+    }
+    
     return config;
   },
   (error) => {

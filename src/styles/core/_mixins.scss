@@ -168,6 +168,12 @@
   font-weight: $font-weight-semibold;
 }
 
+@mixin font-title-m-2 {
+  font-size: $font-size-m-2;
+  line-height: $line-height-m-2;
+  font-weight: $font-weight-semibold;
+}
+
 @mixin font-title-m {
   font-size: $font-size-m;
   line-height: $line-height-m;
@@ -187,7 +193,7 @@
 }
 
 @mixin font-body-m {
-  font-size: $font-size-s;
+  font-size: $font-size-m;
   line-height: $line-height-s;
   font-weight: $font-weight-regular;
 }
