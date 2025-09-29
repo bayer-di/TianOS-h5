@@ -1,0 +1,25 @@
+.c-result {
+    margin-top: 72px;
+
+    .adm-result {
+        padding-top: 0;
+
+        .adm-result-icon{
+            box-sizing: content-box;
+            padding: 0;
+            margin: 0 auto;
+
+        }
+
+        .adm-result-title {
+            margin-top: 16px;
+            @include font-title-l;
+        }
+
+        .adm-result-description {
+            margin-top: 12px;
+            @include font-body-m;
+            color: $text-color-secondary;
+        }
+    }
+}

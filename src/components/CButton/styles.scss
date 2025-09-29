@@ -42,7 +42,7 @@
   }
 
   &--large {
-    @include button-size($spacing-sm, $spacing-lg, $font-size-s);
+    @include button-size($spacing-sm, $spacing-lg, $font-size-m-2);
     height: 48px;
   }
 
@@ -66,38 +66,48 @@
   }
 
   &:disabled, &[disabled] {
-    opacity: 0.6;
+    background-color: $bg-disabled;
+    color: $gray-8;
+    @include font-body-m;
+    // opacity: 0.6;
     cursor: not-allowed;
     pointer-events: none;
   }
 }
 
 // 覆盖 antd-mobile 按钮样式
-.adm-button {
-  @include font-body-m;
+:root {
+  .adm-button {
+    @include font-body-m;
+  
+    &--primary {
+      --background-color: $primary-color;
+      --text-color: $white;
+    }
+  
+    &--default {
+      --background-color: $white;
+      --text-color: $border-color;
+    }
+  
+    &--success {
+      --background-color: $success-color;
+      --text-color: $white;
+    }
+  
+    &--warning {
+      --background-color: $warning-color;
+      --text-color: $white;
+    }
+  
+    &--danger {
+      --background-color: $error-color;
+      --text-color: $white;
+    }
 
-  &--primary {
-    --background-color: $primary-color;
-    --text-color: $white;
-  }
-
-  &--default {
-    --background-color: $white;
-    --text-color: $border-color;
-  }
-
-  &--success {
-    --background-color: $success-color;
-    --text-color: $white;
-  }
-
-  &--warning {
-    --background-color: $warning-color;
-    --text-color: $white;
-  }
-
-  &--danger {
-    --background-color: $error-color;
-    --text-color: $white;
+    &--disabled {
+      --background-color: $bg-disabled;
+      --text-color: $gray-8;
+    }
   }
 }

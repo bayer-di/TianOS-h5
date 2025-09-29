@@ -11,7 +11,7 @@ interface CIconProps {
 
 export const IconFont = createFromIconfontCN({
   scriptUrl:
-    'https://fe-statics.cosmos-ag.com/TianOS-H5/iconfont-20250922-154031.js',
+    'https://fe-statics.cosmos-ag.com/TianOS-H5/iconfont-20250929-160513.js',
 })
 
 export const CIcon: React.FC<CIconProps> = ({ color, size, ...props }) => {

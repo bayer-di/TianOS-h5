@@ -1,0 +1,58 @@
+.c-dialog {
+
+  .adm-dialog-body {
+    padding: 0;
+    --adm-color-border: $gray-9;
+
+    .adm-dialog-content {
+        padding: 24px 16px;
+
+        .c-dialog-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+
+            &-title {
+                text-align: center;
+                @include font-title-m;
+                color: $gray-1;
+            }
+
+            &-content {
+                text-align: center;
+                @include font-body-m;
+                color: $gray-4;
+            }
+        }
+    }
+
+    .adm-dialog-footer {
+        display: flex;
+        flex-direction: row;
+
+        .adm-dialog-action-row {
+            flex: 1;
+            border-top: 0.5px solid $gray-9 !important;
+
+            &:not(:last-child) {
+                border-right: 0.5px solid $gray-9;
+            }
+
+            &:first-child {
+                .adm-dialog-button {
+                    color: $gray-1;
+                    @include font-body-m;
+                }
+            }
+
+            &:last-child {
+                .adm-dialog-button {
+                    color: $blue-4;
+                    @include font-title-m;
+                }
+            }
+        }
+    }
+  }
+}

@@ -13,14 +13,19 @@
   }
   
   &__footer {
-    padding: $spacing-s $spacing-m;
+    padding: $spacing-m $spacing-md-2;
     background-color: $white;
+    &--border {
+      border-top: 1px solid $border-color;
+    }
   }
   
   &__submit {
-    padding: $spacing-s $spacing-m;
+    padding: $spacing-m $spacing-md-2;
     background-color: $white;
-    
+    &--border {
+      border-top: 1px solid $border-color;
+    }
     // .adm-button {
     //   height: 44px;
     //   @include font-body-m;

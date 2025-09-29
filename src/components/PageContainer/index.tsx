@@ -4,10 +4,11 @@ import CNavBar from '../CNavBar'
 import TripleLayout from '../../layouts/TripleLayout'
 import CButton from '../CButton'
 import { useNavigate } from 'react-router-dom'
+import CLoading from '../CLoading'
 
 interface PageContainerProps {
   /** 页面标题 */
-  title: string
+  title?: string
   /** 中间内容区域 */
   children: ReactNode
   /** 是否显示返回按钮 */
@@ -18,6 +19,8 @@ interface PageContainerProps {
   right?: ReactNode
   /** 底部内容 */
   footer?: ReactNode
+  border?: boolean
+  loading?: boolean
   /** 是否适配安全区域 */
   safeArea?: boolean
   /** 自定义类名 */
@@ -47,19 +50,21 @@ const PageContainer: React.FC<PageContainerProps> = ({
   title,
   children,
   showBack = true,
-  onBack,
+  border = true,
   right,
   footer,
+  loading = false,
   safeArea = true,
   className,
   contentClassName,
   contentStyle,
   showSubmit = false,
   submitText = '提交',
-  onSubmit,
   submitLoading = false,
   submitDisabled = false,
-  submitClassName
+  submitClassName,
+  onBack,
+  onSubmit,
 }) => {
   const navigate = useNavigate()
   
@@ -74,6 +79,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
   // 页面头部
   const header = (
     <CNavBar 
+      border={border}
       title={title}
       onBack={showBack ? handleBack : undefined}
       backIcon={showBack}
@@ -84,17 +90,21 @@ const PageContainer: React.FC<PageContainerProps> = ({
   // 页面底部
   const renderFooter = () => {
     if (footer) {
-      return <div className="page-container__footer">{footer}</div>
+      return <div className={cls('page-container__footer', {
+        'page-container__footer--border': border,
+      })}>{footer}</div>
     }
     
     if (showSubmit) {
       return (
-        <div className={cls('page-container__submit', submitClassName)}>
+        <div className={cls('page-container__submit', submitClassName, {
+          'page-container__submit--border': border,
+        })}>
           <CButton
             block
             type="submit"
             color="primary"
-            // size="large"
+            size="large"
             onClick={onSubmit}
             loading={submitLoading}
             disabled={submitDisabled}
@@ -118,7 +128,9 @@ const PageContainer: React.FC<PageContainerProps> = ({
         contentStyle={contentStyle}
       >
         <div className="page-container__content">
-          {children}
+          <CLoading loading={loading} >
+            {children}
+         </CLoading>
         </div>
       </TripleLayout>
     </div>

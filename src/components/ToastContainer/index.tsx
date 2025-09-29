@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { CIcon } from '../CIcon'
 import type { ToastInstance } from '@/contexts/toast-types'
+// import CLoading from '../CLoading'
 import './styles.scss'
 
 // 全局类型声明
@@ -23,9 +24,9 @@ const ToastComponent: React.FC<{
   // 根据icon选择不同的图标
   let iconElement = null
   if (icon === 'success') {
-    iconElement = <CIcon type="Global_15" size={32} />
+    iconElement = <CIcon type="Global_18" size={40} color="#00B42A" />
   } else if (icon === 'fail') {
-    iconElement = <CIcon type="Global_12" size={32} />
+    iconElement = <CIcon type="Global_21" size={40} color="#FF4D4F" />
   } else if (icon === 'loading') {
     iconElement = <div className="toast-icon toast-loading"></div>
   }

@@ -5,18 +5,20 @@ import { CIcon } from '../CIcon'
 import type { NavBarProps } from 'antd-mobile/es/components/nav-bar'
 
 interface CNavBarProps extends NavBarProps {
-  title: string
+  title?: string
+  border?: boolean
 }
 
 const CNavBar: React.FC<CNavBarProps> = (props) => {
-  const { title, className, backIcon, ...rest } = props
+  const { title, className, backIcon, border, ...rest } = props
   return (
     <NavBar
       backIcon={backIcon ? <CIcon type="Global_05" /> : false}
       className={cls('c-nav-bar', className)}
       style={{
-        '--height': '52px',
+        '--height': '42px',
         backgroundColor: '#fff',
+        borderBottom: border ? '1px solid #DFDFDF' : 'none',
       }}
      {...rest} 
     >
