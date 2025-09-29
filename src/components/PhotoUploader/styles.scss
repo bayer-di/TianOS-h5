@@ -1,0 +1,59 @@
+.photo-uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .adm-image-uploader {
+    // display: none;
+  }
+  
+  &__title {
+    @include font-title-m-2;
+  }
+  
+  &__content {
+    width: 357px;
+    height: 224px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &__preview, &__uploader{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      // 等比例缩放，保持图片完整
+      object-fit: contain;
+      // object-fit: cover;
+    }
+  }
+
+  
+  &__actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &__delete-btn {
+    margin-top: 15px;
+    margin-right: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: $gray-9;
+    
+  }
+}

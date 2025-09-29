@@ -1,10 +1,10 @@
 import React, { type ReactNode } from 'react'
-import cls from 'classnames'
-import CNavBar from '../CNavBar'
-import TripleLayout from '../../layouts/TripleLayout'
-import CButton from '../CButton'
 import { useNavigate } from 'react-router-dom'
-import CLoading from '../CLoading'
+import cls from 'classnames'
+import CNavBar from '@/components/CNavBar'
+import CButton from '@/components/CButton'
+import CLoading from '@/components/CLoading'
+import TripleLayout from '@/layouts/TripleLayout'
 
 interface PageContainerProps {
   /** 页面标题 */
