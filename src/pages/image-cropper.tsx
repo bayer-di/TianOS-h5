@@ -8,6 +8,7 @@ import { Toast } from '@/contexts/toast-api'
 import { OCRTypeEnum } from '@/types/employeeInfoEntry'
 import { sessionStorage } from '@/utils/storage'
 import { employeeInfoEntryApi } from '@/services/employeeInfoEntry'
+import { useI18n } from '@/hooks/useI18n'
 
 interface LocationState {
   imageUrl: string
@@ -22,6 +23,7 @@ interface LocationState {
 const ImageCropperPage: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { t } = useI18n()
   const state = location.state as LocationState
   
   // 用于跟踪处理状态，当前在UI中不显示，但保留以便未来扩展
@@ -47,9 +49,9 @@ const ImageCropperPage: React.FC = () => {
     onSuccess: ({ data }) => {
       const { type, imgUrl } = data
       if (type === OCRTypeEnum.IdCard) {
-        Toast.success('实名认证通过')
+        Toast.success(t('pages.imageCropper.idCardSuccess'))
       } else {
-        Toast.success('银行卡核验成功')
+        Toast.success(t('pages.imageCropper.bankCardSuccess'))
       }
       
       // 将OCR结果存储在sessionStorage中，确保在页面间传递
@@ -102,23 +104,23 @@ const ImageCropperPage: React.FC = () => {
         visible={dialogVisible}
         data={
           type === OCRTypeEnum.IdCard ? {
-            title: '身份认证不通过',
-            description: '请在网页端手动录入'
+            title: t('pages.imageCropper.idCardFailed'),
+            description: t('pages.imageCropper.manualEntry')
           } : {
-            title: '银行卡信息查询失败',
-            description: '请在网页端手动录入'
+            title: t('pages.imageCropper.bankCardFailed'),
+            description: t('pages.imageCropper.manualEntry')
           }
         }
         closeOnAction
         actions={[
           {
             key: 'cancel',
-            text: '返回',
+            text: t('common.back'),
             onClick: handleDialogCancel
           },
           {
             key: 'confirm',
-            text: '重试',
+            text: t('pages.imageCropper.retry'),
             bold: true,
             onClick: handleDialogConfirm
           }

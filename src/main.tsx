@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { HashRouter } from 'react-router-dom'
 import App from './App'
 
+// 导入 i18n 配置
+import './i18n'
+
 // 导入Ant Design Mobile样式
 import 'antd-mobile/es/global'
 

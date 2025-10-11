@@ -1,0 +1,239 @@
+{
+  "common": {
+    "confirm": "确定",
+    "cancel": "取消",
+    "back": "返回",
+    "submit": "提交",
+    "loading": "加载中...",
+    "success": "操作成功",
+    "error": "操作失败",
+    "required": "此字段为必填项",
+    "placeholder": "请输入",
+    "selectPlaceholder": "请选择",
+    "clear": "清除",
+    "reset": "重置",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "添加",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "refresh": "刷新",
+    "close": "关闭",
+    "open": "打开",
+    "select": "选择",
+    "yes": "是",
+    "no": "否",
+    "ok": "好的",
+    "retry": "重试",
+    "continue": "继续",
+    "finish": "完成",
+    "next": "下一步",
+    "previous": "上一步",
+    "skip": "跳过",
+    "hour": "小时",
+    "selectDateRange": "选择日期范围",
+    "startTime": "开始时间",
+    "endTime": "结束时间",
+    "dateTime": {
+      "year": "年",
+      "month": "月",
+      "day": "日",
+      "hour": "时",
+      "minute": "分",
+      "second": "秒"
+    }
+  },
+  "pages": {
+    "employSelect": {
+      "title": "人员选择",
+      "searchPlaceholder": "输入工号/姓名模糊搜索",
+      "tabs": {
+        "all": "全部",
+        "clockedIn": "已打卡",
+        "notClockedIn": "未打卡"
+      },
+      "actions": {
+        "selectAll": "选择全部",
+        "unselectAll": "取消选择",
+        "confirm": "确定"
+      },
+      "messages": {
+        "noEmployees": "暂无员工数据",
+        "selectAtLeastOne": "请至少选择一个员工",
+        "loadingEmployees": "正在加载员工列表..."
+      }
+    },
+    "resultPage": {
+      "title": "结果反馈",
+      "success": {
+        "title": "操作成功"
+      },
+      "error": {
+        "title": "操作失败"
+      },
+      "backToHome": "返回首页"
+    },
+    "employeeInfoEntry": {
+      "title": "入职信息上传",
+      "idCardUpload": "上传身份证「人像面」",
+      "bankCardUpload": "上传银行卡「卡号面」",
+      "submitSuccess": "信息上传成功",
+      "submitSuccessDesc": "请前往网页端查看"
+    },
+    "workRecordEntry": {
+      "title": "作业记录录入",
+      "submitting": "提交中...",
+      "fields": {
+        "personnel": "人员",
+        "workType": "工种",
+        "zone": "所属区块",
+        "area": "种植区域",
+        "category": "品种",
+        "pieceWork": "计件工作量",
+        "timeWork": "计时工作量",
+        "workTime": "工作时间",
+        "remark": "备注"
+      },
+      "placeholders": {
+        "selectPersonnel": "请选择",
+        "selectWorkType": "选择工种",
+        "selectZone": "选择所属区块",
+        "selectArea": "请选择",
+        "selectCategory": "选择品种",
+        "enterPieceWork": "请输入",
+        "enterTimeWork": "请输入",
+        "enterRemark": "请输入"
+      },
+      "messages": {
+        "selectPersonnel": "请选择人员",
+        "selectWorkType": "请选择工种",
+        "selectZone": "请选择所属区块",
+        "selectArea": "请选择种植区域",
+        "selectCategory": "请选择品种",
+        "enterWorkTime": "请输入工作时间",
+        "enterWorkAmount": "请输入工作量",
+        "submitSuccess": "提交成功",
+        "submitFailed": "提交失败，请重试",
+        "formIncomplete": "请完善表单信息",
+        "noAreaInZone": "当前区块无种植区域",
+        "workTimeDecimal": "计时工作量最多两位小数"
+      }
+    },
+    "imageCropper": {
+      "idCardSuccess": "实名认证通过",
+      "bankCardSuccess": "银行卡核验成功",
+      "idCardFailed": "身份认证不通过",
+      "bankCardFailed": "银行卡信息查询失败",
+      "manualEntry": "请在网页端手动录入",
+      "retry": "重试",
+      "back": "返回"
+    },
+    "toastTest": {
+      "title": "Toast测试页面",
+      "normalToast": "显示普通Toast",
+      "successToast": "显示成功Toast",
+      "failToast": "显示失败Toast",
+      "loadingToast": "显示加载中Toast",
+      "normalMessage": "这是一条普通提示",
+      "successMessage": "操作成功",
+      "failMessage": "操作失败",
+      "loadingMessage": "加载中...",
+      "loadingComplete": "加载完成"
+    },
+    "uiDemo": {
+      "title": "UI组件演示",
+      "workTypeDemo": "工种级联选择器演示",
+      "dateRangeDemo": "日期范围选择器演示",
+      "cascaderDemo": "级联选择器演示",
+      "buttonDemo": "按钮组件演示",
+      "layoutDemo": "布局组件演示"
+    }
+  },
+  "components": {
+    "imageCropper": {
+      "cancel": "取消",
+      "confirm": "确认",
+      "zoom": "缩放",
+      "zoomValue": "缩放值",
+      "processing": "处理中...",
+      "errors": {
+        "canvasContext": "无法获取canvas上下文",
+        "cropFailed": "裁剪图片失败"
+      }
+    },
+    "buttons": {
+      "confirm": "确定",
+      "cancel": "取消",
+      "submit": "提交",
+      "reset": "重置",
+      "save": "保存",
+      "delete": "删除",
+      "edit": "编辑",
+      "add": "添加",
+      "search": "搜索",
+      "filter": "筛选",
+      "sort": "排序",
+      "refresh": "刷新",
+      "close": "关闭",
+      "open": "打开"
+    },
+    "forms": {
+      "required": "此字段为必填项",
+      "placeholder": "请输入",
+      "selectPlaceholder": "请选择",
+      "validation": {
+        "required": "此字段为必填项",
+        "email": "请输入有效的邮箱地址",
+        "phone": "请输入有效的手机号码",
+        "number": "请输入有效的数字",
+        "minLength": "长度不能少于{min}个字符",
+        "maxLength": "长度不能超过{max}个字符",
+        "min": "值不能小于{min}",
+        "max": "值不能大于{max}",
+        "pattern": "格式不正确"
+      }
+    },
+    "messages": {
+      "loading": "加载中...",
+      "success": "操作成功",
+      "error": "操作失败",
+      "warning": "警告",
+      "info": "提示",
+      "confirm": "确认",
+      "cancel": "取消"
+    }
+  },
+  "business": {
+    "workTypes": {
+      "planting": "种植",
+      "harvesting": "收割",
+      "maintenance": "维护",
+      "irrigation": "灌溉",
+      "fertilization": "施肥",
+      "pestControl": "病虫害防治",
+      "pruning": "修剪",
+      "weeding": "除草"
+    },
+    "zones": {
+      "cropArea": "农作物区",
+      "fruitArea": "果园区",
+      "experimentArea": "实验区",
+      "greenhouse": "温室区",
+      "outdoor": "露天区"
+    },
+    "positions": {
+      "manager": "管理员",
+      "supervisor": "主管",
+      "worker": "工人",
+      "technician": "技术员",
+      "driver": "司机"
+    },
+    "clockIn": {
+      "yes": "已打卡",
+      "no": "未打卡",
+      "all": "全部"
+    }
+  }
+}

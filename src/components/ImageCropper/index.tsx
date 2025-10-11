@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import Cropper from 'react-easy-crop'
 import CButton from '@/components/CButton'
+import { useI18n } from '@/hooks/useI18n'
+import i18n from '@/i18n'
 import './styles.scss'
 
 interface ImageCropperProps {
@@ -43,7 +45,7 @@ const createCroppedImage = async (
   const ctx = canvas.getContext('2d')
   
   if (!ctx) {
-    throw new Error('无法获取canvas上下文')
+    throw new Error(i18n.t('components.imageCropper.errors.canvasContext'))
   }
   
   // 绘制裁剪后的图片
@@ -65,7 +67,7 @@ const createCroppedImage = async (
       if (file) {
         resolve(file)
       } else {
-        throw new Error('裁剪图片失败')
+        throw new Error(i18n.t('components.imageCropper.errors.cropFailed'))
       }
     }, 'image/jpeg', 0.95)
   })
@@ -83,7 +85,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
   onCropComplete,
   onCancel
 }) => {
-  console.log('loading', loading)
+  const { t } = useI18n()
   // 裁剪区域位置
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   // 缩放比例
@@ -162,7 +164,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
       
       <div className="image-cropper__controls">
         {/* <div className="image-cropper__zoom">
-          <div className="image-cropper__zoom-label">缩放 ({zoom.toFixed(1)})</div>
+          <div className="image-cropper__zoom-label">{t('components.imageCropper.zoom')} ({zoom.toFixed(1)})</div>
           <Slider
             min={1}
             max={3}
@@ -205,7 +207,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
             className="image-cropper__button"
             onClick={onCancel}
           >
-            取消
+            {t('components.imageCropper.cancel')}
           </CButton>
           <CButton
             className="image-cropper__button"
@@ -214,7 +216,7 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
             loading={processing}
             disabled={processing || loading}
           >
-            确认
+            {t('components.imageCropper.confirm')}
           </CButton>
         </div>
       </div>

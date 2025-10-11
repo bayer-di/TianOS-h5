@@ -6,10 +6,12 @@ import { ClockIn } from '@/types/employee'
 import { useEmployeeStore } from '@/stores'
 import PageContainer from '@/components/PageContainer'
 import { useUrlParams, defaultConverters } from '@/utils/location'
+import { useI18n } from '@/hooks/useI18n'
 
 
 const EmploySelect: React.FC = () => {
   const navigate = useNavigate()
+  const { t } = useI18n()
   
   const { baseId } = useUrlParams({
     baseId: { defaultValue: 0, converter: defaultConverters.number }
@@ -22,7 +24,6 @@ const EmploySelect: React.FC = () => {
     currentPositionId,
     filter,
     isLoading,
-    error,
     setFilter,
     setCurrentPositionId,
     selectEmployee,
@@ -38,7 +39,7 @@ const EmploySelect: React.FC = () => {
       fetchPositions(baseId as number)
       setFilter({ baseId: baseId as number })
     }
-  }, [baseId])
+  }, [baseId, fetchPositions, setFilter])
   
   // 处理员工选择
   const handleEmployeeSelect = (employee: typeof employees[0]) => {
@@ -63,19 +64,19 @@ const EmploySelect: React.FC = () => {
   return (
     <div className="page-employ-select">
       <PageContainer
-        title="人员选择"
+        title={t('pages.employSelect.title')}
         showBack={true}
         onBack={handleBack}
         showSubmit={true}
         onSubmit={handleConfirm}
-        submitText={`确定${selectedEmployees.length > 0 ? `(${selectedEmployees.length})` : ''}`}
+        submitText={`${t('common.confirm')}${selectedEmployees.length > 0 ? `(${selectedEmployees.length})` : ''}`}
         submitDisabled={selectedEmployees.length === 0}
       >
         <div className="employ-select-container">
           {/* 搜索框 */}
           <div className="search-bar-wrapper">
             <SearchBar
-              placeholder="输入工号/姓名模糊搜索"
+              placeholder={t('pages.employSelect.searchPlaceholder')}
               value={filter.keywords}
               onChange={(value) => setFilter({ ...filter, keywords: value })}
             />
@@ -106,15 +107,15 @@ const EmploySelect: React.FC = () => {
                   activeKey={filter.clockIn?.toString()}
                   onChange={key => setFilter({ ...filter, clockIn: parseInt(key) as ClockIn })}
                 >
-                  <Tabs.Tab title="全部" key={ClockIn.ALL.toString()} />
-                  <Tabs.Tab title="已打卡" key={ClockIn.YES.toString()} />
-                  <Tabs.Tab title="未打卡" key={ClockIn.NO.toString()} />
+                  <Tabs.Tab title={t('pages.employSelect.tabs.all')} key={ClockIn.ALL.toString()} />
+                  <Tabs.Tab title={t('pages.employSelect.tabs.clockedIn')} key={ClockIn.YES.toString()} />
+                  <Tabs.Tab title={t('pages.employSelect.tabs.notClockedIn')} key={ClockIn.NO.toString()} />
                 </Tabs>
               </div>
               
               <div className="employee-list">
                 {isLoading ? (
-                  <div className="loading-container">加载中...</div>
+                  <div className="loading-container">{t('common.loading')}</div>
                 ) : (
                   <List>
                     {employees.map(employee => (
@@ -137,8 +138,8 @@ const EmploySelect: React.FC = () => {
               </div>
               
               <div className="select-actions">
-                <span className="action-text" onClick={unselectAllEmployees}>取消选择</span>
-                <span className="action-text" onClick={selectAllEmployees}>选择全部</span>
+                <span className="action-text" onClick={unselectAllEmployees}>{t('pages.employSelect.actions.unselectAll')}</span>
+                <span className="action-text" onClick={selectAllEmployees}>{t('pages.employSelect.actions.selectAll')}</span>
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import cls from 'classnames'
+import i18n from '@/i18n'
 import { useMemoizedFn } from 'ahooks'
 import { isEmpty, isEqual } from 'lodash'
 import List from '../List'
@@ -37,12 +38,12 @@ interface CSelectorProps {
 
 const CSelector: React.FC<CSelectorProps> = ({
   options = [],
-  placeholder = '请选择',
+  placeholder = i18n.t('common.selectPlaceholder'),
   disabled = false,
   multiple = false,
   showCheckMark = true,
   title,
-  confirmText = '确定',
+  confirmText = i18n.t('common.confirm'),
   clearable = false,
   onCancel,
   className,

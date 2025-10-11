@@ -10,6 +10,7 @@ import { sessionStorage } from '@/utils/storage'
 import type { EmployeeInfoData } from '@/types/employeeInfoEntry'
 import { employeeInfoEntryApi } from '@/services/employeeInfoEntry'
 import { useUrlParams, defaultConverters } from '@/utils/location'
+import { useI18n } from '@/hooks/useI18n'
 import './styles.scss'
 
 
@@ -19,6 +20,7 @@ const getSavedEmployeeInfo = (): EmployeeInfoData => {
 
 const EmployeeInfoEntry: React.FC = () => {
   const navigate = useNavigate()
+  const { t } = useI18n()
   const { uuid } = useUrlParams({
     uuid: { defaultValue: '', converter: defaultConverters.string }
   })
@@ -34,8 +36,8 @@ const EmployeeInfoEntry: React.FC = () => {
         replace: true,
         state: {
           status: 'success',
-          title: '信息上传成功',
-          description: '请前往网页端查看',
+          title: t('pages.employeeInfoEntry.submitSuccess'),
+          description: t('pages.employeeInfoEntry.submitSuccessDesc'),
         }
       })
     }
@@ -88,10 +90,10 @@ const EmployeeInfoEntry: React.FC = () => {
 
   return (
     <PageContainer
-      title="入职信息上传"
+      title={t('pages.employeeInfoEntry.title')}
       showBack={false}
       showSubmit={true}
-      submitText="提交"
+      submitText={t('common.submit')}
       onSubmit={handleSubmit}
       submitLoading={loading}
       submitDisabled={!employeeInfo?.idCardImage && !employeeInfo?.bankCardImage}
@@ -101,7 +103,7 @@ const EmployeeInfoEntry: React.FC = () => {
         <div className="upload-section">
           <PhotoUploader
             data={employeeInfo?.idCardImage}
-            title="上传身份证「人像面」"
+            title={t('pages.employeeInfoEntry.idCardUpload')}
             onDelete={onDeleteIdCard}
             emptyImage={idEmptyImage}
             ocrType={OCRTypeEnum.IdCard}
@@ -113,7 +115,7 @@ const EmployeeInfoEntry: React.FC = () => {
         <div className="upload-section">
           <PhotoUploader 
             data={employeeInfo?.bankCardImage}
-            title="上传银行卡「卡号面」"
+            title={t('pages.employeeInfoEntry.bankCardUpload')}
             onDelete={onDeleteBankCard}
             emptyImage={bankEmptyImage}
             ocrType={OCRTypeEnum.BankCard}

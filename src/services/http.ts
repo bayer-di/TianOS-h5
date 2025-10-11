@@ -1,5 +1,6 @@
-import axios, { type AxiosRequestConfig, type AxiosResponse, type AxiosError } from 'axios'
-import { useUserStore } from '../stores';
+import axios, { type AxiosRequestConfig, type AxiosError } from 'axios'
+import { useUserStore } from '../stores'
+import { useLanguageStore } from '../stores/languageStore'
 
 // 创建axios实例
 const http = axios.create({
@@ -19,6 +20,15 @@ http.interceptors.request.use(
     // 如果有token则添加到请求头
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`
+    }
+    
+    // 添加语言头
+    const currentLanguage = useLanguageStore.getState().currentLanguage
+    if (config.headers) {
+      // 可以根据后端要求使用不同的header名称
+      config.headers['Accept-Language'] = currentLanguage
+      // 或者使用自定义header
+      config.headers['X-Language'] = currentLanguage
     }
     
     // 如果数据是FormData类型，则不设置Content-Type，让浏览器自动处理
@@ -70,22 +80,22 @@ http.interceptors.response.use(
 )
 
 // 封装GET请求
-export const get = <T = any>(url: string, params?: any, config?: AxiosRequestConfig): Promise<T> => {
+export const get = <T = unknown>(url: string, params?: unknown, config?: AxiosRequestConfig): Promise<T> => {
   return http.get(url, { params, ...config })
 }
 
 // 封装POST请求
-export const post = <T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
+export const post = <T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> => {
   return http.post(url, data, config)
 }
 
 // 封装PUT请求
-export const put = <T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> => {
+export const put = <T = unknown>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T> => {
   return http.put(url, data, config)
 }
 
 // 封装DELETE请求
-export const del = <T = any>(url: string, config?: AxiosRequestConfig): Promise<T> => {
+export const del = <T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T> => {
   return http.delete(url, config)
 }
 

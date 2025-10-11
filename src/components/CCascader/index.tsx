@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import i18n from '@/i18n'
 import { CascaderView } from 'antd-mobile'
 import type { CascaderOption, CascaderValue, CascaderValueExtend } from 'antd-mobile/es/components/cascader-view/cascader-view'
 import cls from 'classnames'
@@ -6,6 +7,7 @@ import Field from '../Field'
 import CPopup from '../CPopup'
 import CButton from '../CButton'
 import { CIcon } from '../CIcon'
+import { useI18n } from '@/hooks/useI18n'
 // 级联选择器属性接口
 export interface CCascaderProps {
   value?: CascaderValue[]
@@ -29,8 +31,8 @@ export interface CCascaderProps {
 
 const CCascader: React.FC<CCascaderProps> = ({
   options = [],
-  placeholder = '请选择',
-  title = '选择',
+  placeholder = i18n.t('common.selectPlaceholder'),
+  title = i18n.t('common.select'),
   disabled = false,
   value = [],
   changeOnSelect = false,
@@ -42,6 +44,7 @@ const CCascader: React.FC<CCascaderProps> = ({
   className,
   style
 }) => {
+  const { t } = useI18n()
   // 内部状态管理
   const [visible, setVisible] = useState(false)
   const [innerValue, setInnerValue] = useState<CascaderValue[]>(value)
@@ -191,7 +194,7 @@ const CCascader: React.FC<CCascaderProps> = ({
                 size="large"
                 onClick={handleConfirm}
               >
-                确定
+                {t('common.confirm')}
               </CButton>
             </div>
           ) : null

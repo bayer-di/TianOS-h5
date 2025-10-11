@@ -3,10 +3,12 @@ import { DatePickerView } from 'antd-mobile'
 import { CloseCircleFill } from 'antd-mobile-icons'
 import type { Precision } from 'antd-mobile/es/components/date-picker/date-picker-utils'
 import cls from 'classnames'
+import i18n from '@/i18n'
 import dayjs from 'dayjs'
 import CPopup from '../CPopup'
 import CButton from '../CButton'
 import { CIcon } from '../CIcon'
+import { useI18n } from '@/hooks/useI18n'
 import './styles.scss'
 
 export interface DateRangePickerProps {
@@ -58,12 +60,13 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   onChange,
   onCancel,
   onClose,
-  title = '选择日期范围',
-  confirmText = '确定',
+  title = i18n.t('common.selectDateRange'),
+  confirmText = i18n.t('common.confirm'),
   clearable = false,
   className,
   style
 }) => {
+  const { t } = useI18n()
   // 根据精度确定格式化字符串
   const formatString = format || (() => {
     switch (precision) {
@@ -198,13 +201,13 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       >
         <div className="date-range-picker-custom-field__content">
           <div className="date-range-picker-custom-field__start">
-            {getStartTimeText() || <span className="date-range-picker-placeholder">开始时间</span>}
+            {getStartTimeText() || <span className="date-range-picker-placeholder">{t('common.startTime')}</span>}
           </div>
           <div className="date-range-picker-custom-field__separator">
             <CIcon type="Global_51" size={16} />
           </div>
           <div className="date-range-picker-custom-field__end">
-            {getEndTimeText() || <span className="date-range-picker-placeholder">结束时间</span>}
+            {getEndTimeText() || <span className="date-range-picker-placeholder">{t('common.endTime')}</span>}
           </div>
         </div>
         <div className="date-range-picker-custom-field__actions">
@@ -258,14 +261,14 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
               className={cls('date-range-picker-tab', { active: activeTab === 'start' })}
               onClick={() => handleTabChange('start')}
             >
-              {innerValue && innerValue[0] ? dayjs(innerValue[0]).format(formatString) : '开始时间'}
+              {innerValue && innerValue[0] ? dayjs(innerValue[0]).format(formatString) : t('common.startTime')}
             </div>
-            <div className="date-range-picker-tab-separator">至</div>
+            <div className="date-range-picker-tab-separator"><CIcon type="Global_51" size={16} /></div>
             <div 
               className={cls('date-range-picker-tab', { active: activeTab === 'end' })}
               onClick={() => handleTabChange('end')}
             >
-              {innerValue && innerValue[1] ? dayjs(innerValue[1]).format(formatString) : '结束时间'}
+              {innerValue && innerValue[1] ? dayjs(innerValue[1]).format(formatString) : t('common.endTime')}
             </div>
           </div>
         </div>
@@ -284,15 +287,8 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
             max={getMaxDate()}
             className="date-range-picker-view"
             renderLabel={(_type, data) => {
-              switch (_type) {
-                case 'year': return data + '年'
-                case 'month': return data + '月'
-                case 'day': return data + '日'
-                case 'hour': return data + '时'
-                case 'minute': return data + '分'
-                case 'second': return data + '秒'
-                default: return data
-              }
+              const suffix = t(`common.dateTime.${_type}`)
+              return data + suffix
             }}
           />
         </div>

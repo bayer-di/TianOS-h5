@@ -1,0 +1,239 @@
+{
+  "common": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "back": "Back",
+    "submit": "Submit",
+    "loading": "Loading...",
+    "success": "Success",
+    "error": "Error",
+    "required": "This field is required",
+    "placeholder": "Please enter",
+    "selectPlaceholder": "Please select",
+    "clear": "Clear",
+    "reset": "Reset",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "refresh": "Refresh",
+    "close": "Close",
+    "open": "Open",
+    "select": "Select",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "retry": "Retry",
+    "continue": "Continue",
+    "finish": "Finish",
+    "next": "Next",
+    "previous": "Previous",
+    "skip": "Skip",
+    "hour": "Hour",
+    "selectDateRange": "Select Date Range",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "dateTime": {
+      "year": "",
+      "month": "",
+      "day": "",
+      "hour": "",
+      "minute": "",
+      "second": ""
+    }
+  },
+  "pages": {
+    "employSelect": {
+      "title": "Employee Selection",
+      "searchPlaceholder": "Search by employee ID or name",
+      "tabs": {
+        "all": "All",
+        "clockedIn": "Clocked In",
+        "notClockedIn": "Not Clocked In"
+      },
+      "actions": {
+        "selectAll": "Select All",
+        "unselectAll": "Unselect All",
+        "confirm": "Confirm"
+      },
+      "messages": {
+        "noEmployees": "No employee data",
+        "selectAtLeastOne": "Please select at least one employee",
+        "loadingEmployees": "Loading employee list..."
+      }
+    },
+    "resultPage": {
+      "title": "Result Feedback",
+      "success": {
+        "title": "Success"
+      },
+      "error": {
+        "title": "Error"
+      },
+      "backToHome": "Back to Home"
+    },
+    "employeeInfoEntry": {
+      "title": "Employee Information Upload",
+      "idCardUpload": "Upload ID Card (Photo Side)",
+      "bankCardUpload": "Upload Bank Card (Number Side)",
+      "submitSuccess": "Information uploaded successfully",
+      "submitSuccessDesc": "Please check on the web page"
+    },
+    "workRecordEntry": {
+      "title": "Work Record Entry",
+      "submitting": "Submitting...",
+      "fields": {
+        "personnel": "Personnel",
+        "workType": "Work Type",
+        "zone": "Zone",
+        "area": "Planting Area",
+        "category": "Variety",
+        "pieceWork": "Piece Work Amount",
+        "timeWork": "Time Work Amount",
+        "workTime": "Work Time",
+        "remark": "Remark"
+      },
+      "placeholders": {
+        "selectPersonnel": "Please select",
+        "selectWorkType": "Select Work Type",
+        "selectZone": "Select Zone",
+        "selectArea": "Please select",
+        "selectCategory": "Select Variety",
+        "enterPieceWork": "Please enter",
+        "enterTimeWork": "Please enter",
+        "enterRemark": "Please enter"
+      },
+      "messages": {
+        "selectPersonnel": "Please select personnel",
+        "selectWorkType": "Please select work type",
+        "selectZone": "Please select zone",
+        "selectArea": "Please select planting area",
+        "selectCategory": "Please select variety",
+        "enterWorkTime": "Please enter work time",
+        "enterWorkAmount": "Please enter work amount",
+        "submitSuccess": "Submitted successfully",
+        "submitFailed": "Submission failed, please try again",
+        "formIncomplete": "Please complete the form",
+        "noAreaInZone": "No planting area in current zone",
+        "workTimeDecimal": "Time work amount can have at most 2 decimal places"
+      }
+    },
+    "imageCropper": {
+      "idCardSuccess": "Identity verification passed",
+      "bankCardSuccess": "Bank card verification successful",
+      "idCardFailed": "Identity verification failed",
+      "bankCardFailed": "Bank card information query failed",
+      "manualEntry": "Please enter manually on the web page",
+      "retry": "Retry",
+      "back": "Back"
+    },
+    "toastTest": {
+      "title": "Toast Test Page",
+      "normalToast": "Show Normal Toast",
+      "successToast": "Show Success Toast",
+      "failToast": "Show Fail Toast",
+      "loadingToast": "Show Loading Toast",
+      "normalMessage": "This is a normal message",
+      "successMessage": "Operation successful",
+      "failMessage": "Operation failed",
+      "loadingMessage": "Loading...",
+      "loadingComplete": "Loading complete"
+    },
+    "uiDemo": {
+      "title": "UI Component Demo",
+      "workTypeDemo": "Work Type Cascader Demo",
+      "dateRangeDemo": "Date Range Picker Demo",
+      "cascaderDemo": "Cascader Demo",
+      "buttonDemo": "Button Component Demo",
+      "layoutDemo": "Layout Component Demo"
+    }
+  },
+  "components": {
+    "imageCropper": {
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "zoom": "Zoom",
+      "zoomValue": "Zoom Value",
+      "processing": "Processing...",
+      "errors": {
+        "canvasContext": "Unable to get canvas context",
+        "cropFailed": "Failed to crop image"
+      }
+    },
+    "buttons": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "reset": "Reset",
+      "save": "Save",
+      "delete": "Delete",
+      "edit": "Edit",
+      "add": "Add",
+      "search": "Search",
+      "filter": "Filter",
+      "sort": "Sort",
+      "refresh": "Refresh",
+      "close": "Close",
+      "open": "Open"
+    },
+    "forms": {
+      "required": "This field is required",
+      "placeholder": "Please enter",
+      "selectPlaceholder": "Please select",
+      "validation": {
+        "required": "This field is required",
+        "email": "Please enter a valid email address",
+        "phone": "Please enter a valid phone number",
+        "number": "Please enter a valid number",
+        "minLength": "Length cannot be less than {min} characters",
+        "maxLength": "Length cannot exceed {max} characters",
+        "min": "Value cannot be less than {min}",
+        "max": "Value cannot be greater than {max}",
+        "pattern": "Format is incorrect"
+      }
+    },
+    "messages": {
+      "loading": "Loading...",
+      "success": "Success",
+      "error": "Error",
+      "warning": "Warning",
+      "info": "Info",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    }
+  },
+  "business": {
+    "workTypes": {
+      "planting": "Planting",
+      "harvesting": "Harvesting",
+      "maintenance": "Maintenance",
+      "irrigation": "Irrigation",
+      "fertilization": "Fertilization",
+      "pestControl": "Pest Control",
+      "pruning": "Pruning",
+      "weeding": "Weeding"
+    },
+    "zones": {
+      "cropArea": "Crop Area",
+      "fruitArea": "Fruit Area",
+      "experimentArea": "Experiment Area",
+      "greenhouse": "Greenhouse Area",
+      "outdoor": "Outdoor Area"
+    },
+    "positions": {
+      "manager": "Manager",
+      "supervisor": "Supervisor",
+      "worker": "Worker",
+      "technician": "Technician",
+      "driver": "Driver"
+    },
+    "clockIn": {
+      "yes": "Clocked In",
+      "no": "Not Clocked In",
+      "all": "All"
+    }
+  }
+}

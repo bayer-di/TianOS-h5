@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import cls from 'classnames'
+import i18n from '@/i18n'
 import CCascader from '@/components/CCascader'
 import type { CascaderOption } from 'antd-mobile/es/components/cascader-view/cascader-view'
 import type { CCascaderProps } from '@/components/CCascader'
@@ -18,7 +19,7 @@ interface WorkTypeCascaderProps extends Omit<CCascaderProps, 'options'> {
 const WorkTypeCascader: React.FC<WorkTypeCascaderProps> = ({
   value,
   baseId,
-  title = '选择工种',
+  title = i18n.t('components.workTypeCascader.title'),
   disabled = false,
   onChange,
   onCancel,

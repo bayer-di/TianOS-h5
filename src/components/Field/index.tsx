@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react'
 import cls from 'classnames'
+import i18n from '@/i18n'
 import _isNil from 'lodash/isNil'
 import { CloseCircleFill, CalendarOutline } from 'antd-mobile-icons'
 import { CIcon } from '../CIcon'
@@ -38,7 +39,7 @@ export interface FieldProps {
 const Field: React.FC<FieldProps> = ({
   type = 'select',
   value,
-  placeholder = '请选择',
+  placeholder = i18n.t('common.selectPlaceholder'),
   disabled = false,
   onClick,
   clearable = false,

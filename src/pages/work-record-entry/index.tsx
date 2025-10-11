@@ -11,6 +11,7 @@ import CTextArea from '@/components/CTextArea'
 import PageContainer from '@/components/PageContainer'
 import DateRangePicker from '@/components/DateRangePicker'
 import WorkTypeCascader from '@/containers/WorkTypeCascader'
+import { useI18n } from '@/hooks/useI18n'
 import { useEmployeeStore } from '@/stores'
 import { useNavigate } from 'react-router-dom'
 import { useWorkRecordStore } from '@/stores/workRecordStore'
@@ -20,6 +21,7 @@ import type { CascaderOption } from 'antd-mobile/es/components/cascader-view/cas
 
 const WorkRecordEntry: React.FC = () => {
   const navigate = useNavigate()
+  const { t } = useI18n()
   
   const { baseId } = useUrlParams({
     baseId: { defaultValue: 0, converter: defaultConverters.number }
@@ -137,10 +139,11 @@ const WorkRecordEntry: React.FC = () => {
   return (
     <div className="page-work-record-entry">
       <PageContainer
-        title="作业记录录入"
+        title={t('pages.workRecordEntry.title')}
         showBack={false}
         showSubmit={true}
-        submitText={isSubmitting ? "提交中..." : "提交"}
+        submitLoading={isSubmitting}
+        submitText={t('common.submit')}
         onSubmit={handleSubmit}
         // submitDisabled={isSubmitting || loading}
       >
@@ -153,15 +156,15 @@ const WorkRecordEntry: React.FC = () => {
           <Form.Item
             className="required-field"
             name="employeeIds"
-            label="人员"
+            label={t('pages.workRecordEntry.fields.personnel')}
             rules={[{ 
               required: true, 
-              message: '请选择人员',
+              message: t('pages.workRecordEntry.messages.selectPersonnel'),
               // 使用自定义校验器，如果selectedEmployees有值，则通过验证
               validator: () => {
                 return selectedEmployees.length > 0 
                   ? Promise.resolve() 
-                  : Promise.reject(new Error('请选择人员'));
+                  : Promise.reject(new Error(t('pages.workRecordEntry.messages.selectPersonnel')));
               }
             }]}
           >
@@ -171,7 +174,7 @@ const WorkRecordEntry: React.FC = () => {
                   selectedEmployees.map(emp => `${emp.employeeNo}-${emp.name}`).join('、') : 
                   undefined
                 }
-                placeholder="请选择"
+                placeholder={t('common.selectPlaceholder')}
               />
             </div>
           </Form.Item>
@@ -179,12 +182,12 @@ const WorkRecordEntry: React.FC = () => {
           <Form.Item 
             className="required-field"
             name="workTypeId" 
-            label="工种" 
-            rules={[{ required: true, message: '请选择工种' }]}
+            label={t('pages.workRecordEntry.fields.workType')} 
+            rules={[{ required: true, message: t('pages.workRecordEntry.messages.selectWorkType') }]}
           >
             <WorkTypeCascader 
-              title="选择工种"
-              baseId={baseId} 
+              title={t('pages.workRecordEntry.placeholders.selectWorkType')}
+              baseId={baseId as number} 
               onChange={handleWorkTypeChange}
             />
           </Form.Item>
@@ -192,15 +195,14 @@ const WorkRecordEntry: React.FC = () => {
           <Form.Item 
             className="required-field"
             name="zoneId" 
-            label="所属区块" 
-            rules={[{ required: true, message: '请选择所属区块' }]}
+            label={t('pages.workRecordEntry.fields.zone')} 
+            rules={[{ required: true, message: t('pages.workRecordEntry.messages.selectZone') }]}
           >
             <CCascader
-              title="选择所属区块"
+              title={t('pages.workRecordEntry.placeholders.selectZone')}
               showConfirmButton
               options={blockOptions}
               onChange={handleBlockChange}
-              placeholder="请选择"
             />
           </Form.Item>
           <Form.Item noStyle dependencies={['zoneId']}>
@@ -222,17 +224,17 @@ const WorkRecordEntry: React.FC = () => {
               return (
                 <Form.Item 
                   name="areaId" 
-                  label="种植区域"
+                  label={t('pages.workRecordEntry.fields.area')}
                 >
                   <CSelector
                     clearable
-                    title="选择种植区域"
+                    title={t('pages.workRecordEntry.placeholders.selectArea')}
                     disabled={!currentZoneId || currentAreaOptions.length === 0}
                     options={currentAreaOptions}
                     placeholder={
                       currentZoneId 
-                        ? (currentAreaOptions.length > 0 ? '请选择' : '当前区块无种植区域') 
-                        : '请选择'
+                        ? (currentAreaOptions.length > 0 ? t('common.selectPlaceholder') : t('pages.workRecordEntry.messages.noAreaInZone')) 
+                        : t('common.selectPlaceholder')
                     }
                   />
                 </Form.Item>
@@ -242,12 +244,12 @@ const WorkRecordEntry: React.FC = () => {
           
           <Form.Item 
             name="categoryId" 
-            label="品种"
+            label={t('pages.workRecordEntry.fields.category')}
           >
             <CSelector
-              title="选择品种"
+              title={t('pages.workRecordEntry.placeholders.selectCategory')}
               options={categoryOptions}
-              placeholder="请选择"
+              // placeholder={t('pages.workRecordEntry.placeholders.selectCategory')}
               clearable
             />
           </Form.Item>
@@ -260,10 +262,10 @@ const WorkRecordEntry: React.FC = () => {
                 return (
                   <Form.Item 
                     name="pieceCount" 
-                    label="计件工作量"
+                    label={t('pages.workRecordEntry.fields.pieceWork')}
                   >
                     <CInput 
-                      placeholder="请输入" 
+                      // placeholder={t('pages.workRecordEntry.placeholders.enterPieceWork')} 
                       min={0}
                       type="number"
                       className="work-amount-input" 
@@ -277,31 +279,31 @@ const WorkRecordEntry: React.FC = () => {
           </Form.Item>
           <Form.Item 
             name="workTimeHour" 
-            label="计时工作量"
+            label={t('pages.workRecordEntry.fields.timeWork')}
             rules={[
               { 
                 pattern: /^[0-9]*(\.[0-9]{1,2})?$/, 
-                message: '计时工作量最多两位小数' 
+                message: t('pages.workRecordEntry.messages.workTimeDecimal') 
               }
             ]}
           >
             <CInput 
-              placeholder="请输入" 
+              placeholder={t('pages.workRecordEntry.placeholders.enterTimeWork')} 
               type="number" 
               className="work-amount-input" 
-              addonAfter="小时" 
+              addonAfter={t('common.hour')}
               min={0}
             />
           </Form.Item>
           
           <Form.Item 
             name="workTime" 
-            label="工作时间"
+            label={t('pages.workRecordEntry.fields.workTime')}
             // initialValue={[now, now]}
           >
             <DateRangePicker 
               defaultValue={[now, now]}
-              title="工作时间"
+              title={t('pages.workRecordEntry.fields.workTime')}
               clearable 
               // onChange={handleWorkTimeChange}
               precision="second"
@@ -310,10 +312,10 @@ const WorkRecordEntry: React.FC = () => {
           
           <Form.Item 
             name="remark" 
-            label="备注"
+            label={t('pages.workRecordEntry.fields.remark')}
           >
             <CTextArea 
-              placeholder="请输入" 
+              placeholder={t('pages.workRecordEntry.placeholders.enterRemark')} 
               maxLength={100}
               rows={2}
               // showCount
