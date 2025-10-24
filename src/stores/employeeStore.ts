@@ -200,11 +200,6 @@ export const useEmployeeStore = create<EmployeeState>()(
     }),
     {
       name: 'employee-selection-storage',
-      // 只持久化选中的员工和筛选条件
-      partialize: (state) => ({ 
-        selectedEmployees: state.selectedEmployees,
-        filter: state.filter 
-      }),
     }
   )
 )

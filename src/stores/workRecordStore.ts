@@ -25,7 +25,7 @@ interface WorkRecordState {
   
   // 操作方法
   updateFormData: (data: Partial<WorkRecordForm>) => void
-  updateEmployees: (employees: IEmployee[]) => void
+  // updateEmployees: (employees: IEmployee[]) => void
   resetForm: () => void
   
   // 数据加载方法
@@ -38,7 +38,7 @@ interface WorkRecordState {
   // 提交相关
   saveWorkRecord: (data: WorkRecordForm) => Promise<void>
   setSubmitting: (isSubmitting: boolean) => void
-  setError: (error: string | null) => void
+  // setError: (error: string | null) => void
 }
 
 // 默认表单数据
@@ -70,15 +70,15 @@ export const useWorkRecordStore = create<WorkRecordState>()(
       },
       
       // 更新员工数据
-      updateEmployees: (employees) => {
-        const employeeIds = employees.map(emp => Number(emp.id))
-        set((state) => ({
-          formData: { 
-            ...state.formData, 
-            employeeIds
-          }
-        }))
-      },
+      // updateEmployees: (employees) => {
+      //   const employeeIds = employees.map(emp => Number(emp.id))
+      //   set((state) => ({
+      //     formData: { 
+      //       ...state.formData, 
+      //       employeeIds
+      //     }
+      //   }))
+      // },
       
       // 重置表单
       resetForm: () => {
@@ -156,17 +156,17 @@ export const useWorkRecordStore = create<WorkRecordState>()(
         set({ isSubmitting })
       },
       
-      // 设置错误信息
-      setError: (error) => {
-        set({ error })
-      }
+      // // 设置错误信息
+      // setError: (error) => {
+      //   set({ error })
+      // }
     }),
     {
       name: 'work-record-storage',
-      // 只持久化表单数据
-      partialize: (state) => ({ 
-        formData: state.formData
-      }),
+      // // 只持久化表单数据
+      // partialize: (state) => ({ 
+      //   formData: state.formData
+      // }),
     }
   )
 )

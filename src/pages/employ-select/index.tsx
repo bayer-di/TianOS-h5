@@ -1,58 +1,113 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CIcon } from '@/components/CIcon'
 import { SearchBar, Tabs, List } from 'antd-mobile'
 import { ClockIn } from '@/types/employee'
-import { useEmployeeStore } from '@/stores'
+import { employeeApi } from '@/services/employee' // 直接使用API
 import PageContainer from '@/components/PageContainer'
 import { useUrlParams, defaultConverters } from '@/utils/location'
 import { useI18n } from '@/hooks/useI18n'
-
+import useEmployeeSelection from '@/hooks/useEmployeeSelection' // 使用新hook
+import { asyncFetch } from '@/utils/common'
+import type { IPosition, IEmployeeFilter } from '@/types/employee'
+import type { IEmployee } from '@/hooks/useEmployeeSelection'
 
 const EmploySelect: React.FC = () => {
   const navigate = useNavigate()
   const { t } = useI18n()
   
+  // 页面本地状态
+  const [positions, setPositions] = useState<IPosition[]>([])
+  const [employees, setEmployees] = useState<IEmployee[]>([])
+  const [currentPositionId, setCurrentPositionId] = useState<number>(0)
+  const [filter, setFilter] = useState<Partial<IEmployeeFilter>>({
+    clockIn: ClockIn.ALL,
+    keywords: '',
+  })
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  // 使用自定义hook管理选择状态
+  const { 
+    selectedEmployees, 
+    isEmployeeSelected,
+    toggleEmployeeSelection, 
+    selectAllEmployees, 
+    unselectAllEmployees, 
+    saveSelectedEmployees
+  } = useEmployeeSelection()
+
   const { baseId } = useUrlParams({
     baseId: { defaultValue: 0, converter: defaultConverters.number }
   })
   
-  const {
-    positions,
-    employees,
-    selectedEmployees,
-    currentPositionId,
-    filter,
-    isLoading,
-    setFilter,
-    setCurrentPositionId,
-    selectEmployee,
-    unselectEmployee,
-    selectAllEmployees,
-    unselectAllEmployees,
-    fetchPositions
-  } = useEmployeeStore()
+  // 获取职位列表
+  const fetchPositions = async (baseId: number) => {
+    await asyncFetch(() => employeeApi.getPositionList(baseId), {
+      onSuccess: (res: unknown) => {
+        const response = res as { data?: IPosition[] }
+        if (response?.data) {
+          setPositions(response.data)
+          if (response.data.length > 0) {
+            setCurrentPositionId(response.data[0].id)
+          }
+        }
+      }
+    })
+  }
+  
+  // 获取员工列表
+  const fetchEmployees = React.useCallback(async () => {
+    if (!currentPositionId) return
+    
+    setIsLoading(true)
+    await asyncFetch(() => employeeApi.getEmployeeList({
+      ...filter,
+      clockIn: filter.clockIn === ClockIn.ALL ? undefined : filter.clockIn,
+      positionId: currentPositionId,
+      baseId: baseId as number,
+    }), {
+      onSuccess: (res: unknown) => {
+        const response = res as { data?: IEmployee[] }
+        if (response?.data) {
+          setEmployees(response.data)
+        }
+      },
+      onFinish: () => {
+        setIsLoading(false)
+      }
+    })
+  }, [filter, currentPositionId, baseId])
   
   // 组件加载时获取职位列表
   useEffect(() => {
     if (baseId) {
       fetchPositions(baseId as number)
-      setFilter({ baseId: baseId as number })
+      setFilter(prev => ({ ...prev, baseId: baseId as number }))
     }
-  }, [baseId, fetchPositions, setFilter])
+  }, [baseId])
   
-  // 处理员工选择
-  const handleEmployeeSelect = (employee: typeof employees[0]) => {
-    const isAlreadySelected = selectedEmployees.some(emp => emp.id === employee.id)
-    if (isAlreadySelected) {
-      unselectEmployee(employee.id)
-    } else {
-      selectEmployee(employee)
+  // 监听筛选条件和职位变化，获取员工列表
+  useEffect(() => {
+    if (currentPositionId) {
+      fetchEmployees()
     }
+  }, [filter, currentPositionId, fetchEmployees])
+  
+  // 处理筛选条件变更
+  const handleFilterChange = (newFilter: Partial<IEmployeeFilter>) => {
+    setFilter(prev => ({ ...prev, ...newFilter }))
+  }
+  
+  // 处理职位选择变更
+  const handlePositionChange = (positionId: number) => {
+    setCurrentPositionId(positionId)
   }
   
   // 处理确认选择
   const handleConfirm = () => {
+    // 保存选中员工到sessionStorage
+    saveSelectedEmployees()
+    // 跳转回作业记录录入页面
     navigate(`/work-record-entry?baseId=${baseId}`)
   }
   
@@ -78,7 +133,7 @@ const EmploySelect: React.FC = () => {
             <SearchBar
               placeholder={t('pages.employSelect.searchPlaceholder')}
               value={filter.keywords}
-              onChange={(value) => setFilter({ ...filter, keywords: value })}
+              onChange={(value) => handleFilterChange({ keywords: value })}
             />
           </div>
           
@@ -91,7 +146,7 @@ const EmploySelect: React.FC = () => {
                   <List.Item
                     key={position.id}
                     arrowIcon={false}
-                    onClick={() => setCurrentPositionId(position.id)}
+                    onClick={() => handlePositionChange(position.id)}
                     className={currentPositionId === position.id ? 'active-position' : ''}
                   >
                     {position.name}
@@ -105,7 +160,7 @@ const EmploySelect: React.FC = () => {
               <div className="employee-tabs">
                 <Tabs
                   activeKey={filter.clockIn?.toString()}
-                  onChange={key => setFilter({ ...filter, clockIn: parseInt(key) as ClockIn })}
+                  onChange={key => handleFilterChange({ clockIn: parseInt(key) as ClockIn })}
                 >
                   <Tabs.Tab title={t('pages.employSelect.tabs.all')} key={ClockIn.ALL.toString()} />
                   <Tabs.Tab title={t('pages.employSelect.tabs.clockedIn')} key={ClockIn.YES.toString()} />
@@ -120,12 +175,12 @@ const EmploySelect: React.FC = () => {
                   <List>
                     {employees.map(employee => (
                       <List.Item
-                        className={employee.isSelected ? 'active-employee' : ''}
+                        className={isEmployeeSelected(employee.id) ? 'active-employee' : ''}
                         arrowIcon={false}
                         key={employee.id}
-                        onClick={() => handleEmployeeSelect(employee)}
+                        onClick={() => toggleEmployeeSelection(employee)}
                         extra={
-                          employee.isSelected && (
+                          isEmployeeSelected(employee.id) && (
                             <CIcon type="Global_15" color="#1856AC" size={20} />
                           )
                         }
@@ -138,24 +193,15 @@ const EmploySelect: React.FC = () => {
               </div>
               
               <div className="select-actions">
-                <span className="action-text" onClick={unselectAllEmployees}>{t('pages.employSelect.actions.unselectAll')}</span>
-                <span className="action-text" onClick={selectAllEmployees}>{t('pages.employSelect.actions.selectAll')}</span>
+                <span className="action-text" onClick={() => unselectAllEmployees(employees)}>
+                  {t('pages.employSelect.actions.unselectAll')}
+                </span>
+                <span className="action-text" onClick={() => selectAllEmployees(employees)}>
+                  {t('pages.employSelect.actions.selectAll')}
+                </span>
               </div>
             </div>
           </div>
-          
-          {/* 底部确认按钮 */}
-          {/* <div className="bottom-actions">
-            <CButton
-              block
-              color="primary"
-              onClick={handleConfirm}
-              className="confirm-button"
-              disabled={selectedEmployees.length === 0}
-            >
-              确定{selectedEmployees.length > 0 ? `(${selectedEmployees.length})` : ''}
-            </CButton>
-          </div> */}
         </div>
       </PageContainer>
     </div>

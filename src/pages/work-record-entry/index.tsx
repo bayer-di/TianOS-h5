@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { 
   Form
 } from 'antd-mobile'
@@ -12,12 +12,18 @@ import PageContainer from '@/components/PageContainer'
 import DateRangePicker from '@/components/DateRangePicker'
 import WorkTypeCascader from '@/containers/WorkTypeCascader'
 import { useI18n } from '@/hooks/useI18n'
-import { useEmployeeStore } from '@/stores'
+import useWorkRecord from '@/hooks/useWorkRecord'
 import { useNavigate } from 'react-router-dom'
 import { useWorkRecordStore } from '@/stores/workRecordStore'
 import { useUrlParams, defaultConverters } from '@/utils/location'
 import type { IBlockLevel, WorkRecordForm } from '@/types/workRecord'
 import type { CascaderOption } from 'antd-mobile/es/components/cascader-view/cascader-view'
+
+const defaultFormData: Partial<WorkRecordForm> = {
+  employeeIds: [],
+  pieceCount: 0,
+  workTimeHour: 0,
+}
 
 const WorkRecordEntry: React.FC = () => {
   const navigate = useNavigate()
@@ -27,19 +33,23 @@ const WorkRecordEntry: React.FC = () => {
     baseId: { defaultValue: 0, converter: defaultConverters.number }
   })
   
-  const { selectedEmployees = [] } = useEmployeeStore()
+  // 使用自定义 hook 管理表单数据和选中人员
+  const { 
+    formData: storedFormData, 
+    selectedEmployees, 
+    saveFormData, 
+    clearWorkRecordData 
+  } = useWorkRecord()
   
   const { 
     zones, 
     areaMap, 
     categories, 
     isSubmitting,
-    formData,
     workTypesMap,
     fetchZones, 
     fetchAreaMap, 
     fetchCategories, 
-    updateFormData,
     saveWorkRecord,
     fetchWorkTypesAll,
   } = useWorkRecordStore()
@@ -48,6 +58,21 @@ const WorkRecordEntry: React.FC = () => {
   
   // 当前选中的工种数据
   const now = new Date().getTime()
+  // 合并默认值与存储的表单数据
+  const [formData, setFormData] = useState<Partial<WorkRecordForm>>({
+    ...defaultFormData,
+    ...storedFormData
+  })
+
+
+  // 提交作业记录
+  // const [{ loading, runAsync: submitAction }] = useDIRequest(workRecordApi.saveWorkRecord, {
+  //   manual: true,
+  // }, {
+  //   onSuccess: () => {
+      
+  //   }
+  // })
   
   useEffect(() => {
     if (baseId) {
@@ -60,25 +85,22 @@ const WorkRecordEntry: React.FC = () => {
     }
   }, [baseId])
   
-  // 监听表单字段变化，同步到store
+  // 监听表单字段变化，保存到 sessionStorage
   const handleFormValuesChange = (changedValues: Record<string, unknown>) => {
-    const filteredChanges = { ...changedValues }
-
-    if (Object.keys(filteredChanges).length > 0) {
-      updateFormData(filteredChanges as Partial<WorkRecordForm>)
+    if (Object.keys(changedValues).length > 0) {
+      const newData = { ...formData, ...changedValues as Partial<WorkRecordForm> }
+      setFormData(newData)
+      saveFormData(newData)
     }
   }
   
-  // 当组件加载或selectedEmployees变化时，更新表单字段
+  // 当组件加载时，恢复表单数据
   useEffect(() => {
-    const employeeIds = selectedEmployees.map(emp => Number(emp.id))
-    form.setFieldValue('employeeIds', employeeIds)
-  }, [selectedEmployees])
-  
-  // 从store中恢复表单数据
-  useEffect(() => {
-    form.setFieldsValue(formData)
-  }, [formData])
+    if (storedFormData) {
+      // 直接使用存储的表单数据，包含了所有信息
+      form.setFieldsValue(storedFormData)
+    }
+  }, [form, storedFormData])
   
   const blockOptions = React.useMemo(() => {
     // 递归转换函数，保留树形结构
@@ -113,8 +135,8 @@ const WorkRecordEntry: React.FC = () => {
   // 处理表单提交
   const handleSubmit = async () => {
     const res = await form.validateFields()
-    const { workTime = [], workTypeId = [], ...rest } = res
-    const formData = {
+    const { workTime = [], workTypeId = [], selectedEmployees: _, ...rest } = res
+    const submitData = {
       ...rest,
       baseId,
       employeeIds: selectedEmployees.map(emp => Number(emp.id)),
@@ -126,13 +148,11 @@ const WorkRecordEntry: React.FC = () => {
       zoneId: Number(res.zoneId[res.zoneId.length - 1]),
     }
 
-    await saveWorkRecord(formData).then(() => {
+    await saveWorkRecord(submitData).then(() => {
       // 提交成功后清空表单数据
       form.resetFields()
-      // 清空已选择的人员
-      useEmployeeStore.getState().clearSelectedEmployees()
-      // 重置workRecordStore中的表单数据
-      useWorkRecordStore.getState().resetForm()
+      // 清空已选择的人员和存储的数据
+      clearWorkRecordData()
     })
   }
 
@@ -151,6 +171,7 @@ const WorkRecordEntry: React.FC = () => {
           form={form}
           layout="vertical"
           className="work-record-form"
+          initialValues={defaultFormData}
           onValuesChange={handleFormValuesChange}
         >
           <Form.Item
@@ -168,7 +189,16 @@ const WorkRecordEntry: React.FC = () => {
               }
             }]}
           >
-            <div className="personnel-field-container" onClick={() => navigate(`/employ-select?baseId=${baseId}`)}>
+            <div className="personnel-field-container" onClick={() => {
+              // 保存当前表单数据到 sessionStorage 后再跳转
+              const currentFormData = form.getFieldsValue();
+              // 确保保留当前选中的人员
+              saveFormData({
+                ...currentFormData,
+                selectedEmployees  // 保持已选人员数据
+              });
+              navigate(`/employ-select?baseId=${baseId}`);
+            }}>
               <Field
                 value={selectedEmployees.length > 0 ? 
                   selectedEmployees.map(emp => `${emp.employeeNo}-${emp.name}`).join('、') : 
