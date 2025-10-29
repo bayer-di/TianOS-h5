@@ -16,6 +16,7 @@ import useWorkRecord from '@/hooks/useWorkRecord'
 import { useNavigate } from 'react-router-dom'
 import { useWorkRecordStore } from '@/stores/workRecordStore'
 import { useUrlParams, defaultConverters } from '@/utils/location'
+import { getCurrentTimeWithMinutes } from '@/utils/date'
 import type { IBlockLevel, WorkRecordForm } from '@/types/workRecord'
 import type { CascaderOption } from 'antd-mobile/es/components/cascader-view/cascader-view'
 
@@ -56,8 +57,8 @@ const WorkRecordEntry: React.FC = () => {
   
   const [form] = Form.useForm()
   
-  // 当前选中的工种数据
-  const now = new Date().getTime()
+  // 创建默认时间：当前时间的年月日时+30分0秒
+  const defaultTime = getCurrentTimeWithMinutes(30, 0)
   // 合并默认值与存储的表单数据
   const [formData, setFormData] = useState<Partial<WorkRecordForm>>({
     ...defaultFormData,
@@ -332,11 +333,11 @@ const WorkRecordEntry: React.FC = () => {
             // initialValue={[now, now]}
           >
             <DateRangePicker 
-              defaultValue={[now, now]}
+              defaultValue={[defaultTime, defaultTime]}
               title={t('pages.workRecordEntry.fields.workTime')}
               clearable 
               // onChange={handleWorkTimeChange}
-              precision="second"
+              precision="minute"
             />
           </Form.Item>
           
