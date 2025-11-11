@@ -30,8 +30,8 @@ const WorkRecordEntry: React.FC = () => {
   const navigate = useNavigate()
   const { t } = useI18n()
   
-  const { baseId } = useUrlParams({
-    baseId: { defaultValue: 0, converter: defaultConverters.number }
+  const { uuid } = useUrlParams({
+    uuid: { defaultValue: '', converter: defaultConverters.string }
   })
   
   // 使用自定义 hook 管理表单数据和选中人员
@@ -76,15 +76,15 @@ const WorkRecordEntry: React.FC = () => {
   // })
   
   useEffect(() => {
-    if (baseId) {
+    if (uuid) {
       Promise.all([
-        fetchZones(baseId as number),
-        fetchAreaMap(baseId as number),
-        fetchCategories(baseId as number),
-        fetchWorkTypesAll(baseId as number)
+        fetchZones(uuid as string),
+        fetchAreaMap(uuid as string),
+        fetchCategories(uuid as string),
+        fetchWorkTypesAll(uuid as string)
       ])
     }
-  }, [baseId])
+  }, [uuid])
   
   // 监听表单字段变化，保存到 sessionStorage
   const handleFormValuesChange = (changedValues: Record<string, unknown>) => {
@@ -139,7 +139,7 @@ const WorkRecordEntry: React.FC = () => {
     const { workTime = [], workTypeId = [], selectedEmployees: _, ...rest } = res
     const submitData = {
       ...rest,
-      baseId,
+      uuid,
       employeeIds: selectedEmployees.map(emp => Number(emp.id)),
       startTime: workTime?.[0],
       endTime: workTime?.[1],
@@ -198,7 +198,7 @@ const WorkRecordEntry: React.FC = () => {
                 ...currentFormData,
                 selectedEmployees  // 保持已选人员数据
               });
-              navigate(`/employ-select?baseId=${baseId}`);
+              navigate(`/employ-select?uuid=${uuid}`);
             }}>
               <Field
                 value={selectedEmployees.length > 0 ? 
@@ -218,7 +218,7 @@ const WorkRecordEntry: React.FC = () => {
           >
             <WorkTypeCascader 
               title={t('pages.workRecordEntry.placeholders.selectWorkType')}
-              baseId={baseId as number} 
+              uuid={uuid as string} 
               onChange={handleWorkTypeChange}
             />
           </Form.Item>

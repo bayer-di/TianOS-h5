@@ -65,7 +65,7 @@ http.interceptors.response.use(
       }
       
       // 处理其他错误
-      const errorMessage = (error.response?.data as any)?.message || '请求失败'
+      const errorMessage = (error.response?.data as any)?.msg || '请求失败'
       console.error(`请求错误 ${status}: ${errorMessage}`)
     } else if (error.request) {
       // 请求发出但没有收到响应

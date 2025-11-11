@@ -40,7 +40,7 @@ interface EmployeeState {
   clearSelectedEmployees: () => void
   
   // 数据加载方法
-  fetchPositions: (baseId: number) => Promise<void>
+  fetchPositions: (uuid: string) => Promise<void>
   fetchEmployees: () => Promise<void>
 }
 
@@ -164,10 +164,10 @@ export const useEmployeeStore = create<EmployeeState>()(
       },
       
       // 获取职位列表
-      fetchPositions: async (baseId) => {
-        await asyncFetch(() => employeeApi.getPositionList(baseId), {
-          onSuccess: (res) => {
-            set({ positions: res.data, currentPositionId: res.data.length > 0 ? res.data[0].id : 0 })
+      fetchPositions: async (uuid) => {
+        await asyncFetch(() => employeeApi.getPositionList(uuid), {
+          onSuccess: (res: any) => {
+            set({ positions: res?.data, currentPositionId: res.data.length > 0 ? res.data[0].id : 0 })
             if (res.data.length > 0) {
               get().fetchEmployees()
             }
@@ -186,7 +186,7 @@ export const useEmployeeStore = create<EmployeeState>()(
           clockIn: filter.clockIn === ClockIn.ALL ? undefined : filter.clockIn,
           positionId: currentPositionId,
         }), {
-          onSuccess: (res) => {
+          onSuccess: (res: any) => {
             if (res && res.data) {
               const employeeList = res.data.map((emp: IEmployee) => {
                 const isSelected = selectedEmployees.some(selected => selected.id === emp.id)

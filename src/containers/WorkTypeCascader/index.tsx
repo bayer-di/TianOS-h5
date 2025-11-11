@@ -9,7 +9,7 @@ import { workRecordApi } from '@/services/workRecord'
 import './styles.scss'
 
 interface WorkTypeCascaderProps extends Omit<CCascaderProps, 'options'> {
-  baseId: number
+  uuid: string
   title?: string
   disabled?: boolean
   className?: string
@@ -18,7 +18,7 @@ interface WorkTypeCascaderProps extends Omit<CCascaderProps, 'options'> {
 
 const WorkTypeCascader: React.FC<WorkTypeCascaderProps> = ({
   value,
-  baseId,
+  uuid,
   title = i18n.t('components.workTypeCascader.title'),
   disabled = false,
   onChange,
@@ -33,17 +33,17 @@ const WorkTypeCascader: React.FC<WorkTypeCascaderProps> = ({
   
   // 获取工种组数据
   const fetchWorkTypeGroups = React.useCallback(async () => {
-    const res = await workRecordApi.getWorkTypeList(baseId)
+    const res = await workRecordApi.getWorkTypeList(uuid)
     setWorkTypeGroups(res.data || [])
-  }, [baseId])
+  }, [uuid])
   
   // 当baseId变化时获取数据，或者使用测试数据
   useEffect(() => {
-    if (baseId) {
+    if (uuid) {
       // 否则从API获取数据
       fetchWorkTypeGroups()
     }
-  }, [baseId, fetchWorkTypeGroups])
+  }, [uuid, fetchWorkTypeGroups])
 
   // 将工种组数据转换为级联选择器选项
   const cascaderOptions = useMemo(() => {

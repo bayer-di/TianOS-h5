@@ -36,13 +36,13 @@ const EmploySelect: React.FC = () => {
     saveSelectedEmployees
   } = useEmployeeSelection()
 
-  const { baseId } = useUrlParams({
-    baseId: { defaultValue: 0, converter: defaultConverters.number }
+  const { uuid } = useUrlParams({
+    uuid: { defaultValue: '', converter: defaultConverters.string }
   })
   
   // 获取职位列表
-  const fetchPositions = async (baseId: number) => {
-    await asyncFetch(() => employeeApi.getPositionList(baseId), {
+  const fetchPositions = async (uuid: string) => {
+    await asyncFetch(() => employeeApi.getPositionList(uuid), {
       onSuccess: (res: unknown) => {
         const response = res as { data?: IPosition[] }
         if (response?.data) {
@@ -64,7 +64,7 @@ const EmploySelect: React.FC = () => {
       ...filter,
       clockIn: filter.clockIn === ClockIn.ALL ? undefined : filter.clockIn,
       positionId: currentPositionId,
-      baseId: baseId as number,
+      uuid: uuid as string,
     }), {
       onSuccess: (res: unknown) => {
         const response = res as { data?: IEmployee[] }
@@ -76,15 +76,15 @@ const EmploySelect: React.FC = () => {
         setIsLoading(false)
       }
     })
-  }, [filter, currentPositionId, baseId])
+  }, [filter, currentPositionId, uuid])
   
   // 组件加载时获取职位列表
   useEffect(() => {
-    if (baseId) {
-      fetchPositions(baseId as number)
-      setFilter(prev => ({ ...prev, baseId: baseId as number }))
+    if (uuid) {
+      fetchPositions(uuid as string)
+      setFilter(prev => ({ ...prev, uuid: uuid as string }))
     }
-  }, [baseId])
+  }, [uuid])
   
   // 监听筛选条件和职位变化，获取员工列表
   useEffect(() => {
@@ -108,7 +108,7 @@ const EmploySelect: React.FC = () => {
     // 保存选中员工到sessionStorage
     saveSelectedEmployees()
     // 跳转回作业记录录入页面
-    navigate(`/work-record-entry?baseId=${baseId}`)
+    navigate(`/work-record-entry?uuid=${uuid}`)
   }
   
   // 处理返回

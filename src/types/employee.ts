@@ -14,7 +14,7 @@ export enum ClockIn {
 }
 
 export interface IEmployeeFilter {
-  baseId: number
+  uuid: string
   positionId: number
   /** 工号/姓名 */
   keywords: string

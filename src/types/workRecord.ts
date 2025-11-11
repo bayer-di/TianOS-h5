@@ -1,7 +1,7 @@
 /** 作业记录表单录入 */
 export interface WorkRecordForm {
     id?: number
-    baseId: number
+    uuid: string
     /** 工种 */
     workTypeId: number
     /** 员工 */

@@ -69,8 +69,9 @@ export const asyncFetch = async <T>(
     return true
   } catch (e: unknown) {
     // 解析错误信息
-    const errorMsg = parseMessage(e)
-    
+    // const errorMsg = parseMessage(e)
+    const errorMsg = (e as any).response?.data?.msg || parseMessage(e)
+
     // 隐藏加载提示
     if (loadingToast) {
       loadingToast.clear()

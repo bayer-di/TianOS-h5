@@ -29,11 +29,11 @@ interface WorkRecordState {
   resetForm: () => void
   
   // 数据加载方法
-  fetchWorkTypes: (baseId: number) => Promise<void>
-  fetchZones: (baseId: number) => Promise<void>
-  fetchAreaMap: (baseId: number) => Promise<void>
-  fetchCategories: (baseId: number) => Promise<void>
-  fetchWorkTypesAll: (baseId: number) => Promise<void>
+  fetchWorkTypes: (uuid: string) => Promise<void>
+  fetchZones: (uuid: string) => Promise<void>
+  fetchAreaMap: (uuid: string) => Promise<void>
+  fetchCategories: (uuid: string) => Promise<void>
+  fetchWorkTypesAll: (uuid: string) => Promise<void>
   
   // 提交相关
   saveWorkRecord: (data: WorkRecordForm) => Promise<void>
@@ -90,18 +90,18 @@ export const useWorkRecordStore = create<WorkRecordState>()(
       },
       
       // 获取工种级联列表
-      fetchWorkTypes: async (baseId) => {
-        await asyncFetch(() => workRecordApi.getWorkTypeList(baseId), {
-          onSuccess: (res) => {
+      fetchWorkTypes: async (uuid) => {
+        await asyncFetch(() => workRecordApi.getWorkTypeList(uuid), {
+          onSuccess: (res: any) => {
             set({ workTypes: res.data })
           },
         })
       },
 
       // 获取工种列表（全量）
-      fetchWorkTypesAll: async (baseId: number) => {
-        await asyncFetch(() => workRecordApi.getWorkTypeListAll(baseId), {
-          onSuccess: (res) => {
+      fetchWorkTypesAll: async (uuid: string) => {
+        await asyncFetch(() => workRecordApi.getWorkTypeListAll(uuid), {
+          onSuccess: (res: any) => {
             set({ workTypesAll: res.data })
             set({ workTypesMap: res.data.reduce((acc: Record<number, IWorkType>, item: IWorkType) => {
               acc[item.id] = item
@@ -112,27 +112,27 @@ export const useWorkRecordStore = create<WorkRecordState>()(
       },
       
       // 获取区块级联列表
-      fetchZones: async (baseId) => {
-        await asyncFetch(() => workRecordApi.getZoneList(baseId), {
-          onSuccess: (res) => {
+      fetchZones: async (uuid) => {
+        await asyncFetch(() => workRecordApi.getZoneList(uuid), {
+          onSuccess: (res: any) => {
             set({ zones: res.data })
           },
         })
       },
       
       // 获取区块-种植区域映射
-      fetchAreaMap: async (baseId) => {
-        await asyncFetch(() => workRecordApi.getAreaMap(baseId), {
-          onSuccess: (res) => {
+      fetchAreaMap: async (uuid) => {
+        await asyncFetch(() => workRecordApi.getAreaMap(uuid), {
+          onSuccess: (res: any) => {
             set({ areaMap: res.data.areaZoneMap })
           },
         })
       },
       
       // 获取品种列表
-      fetchCategories: async (baseId) => {
-        await asyncFetch(() => workRecordApi.getCategoryList(baseId), {
-          onSuccess: (res) => {
+      fetchCategories: async (uuid) => {
+        await asyncFetch(() => workRecordApi.getCategoryList(uuid), {
+          onSuccess: (res: any) => {
             set({ categories: res.data })
           },
         })
@@ -145,9 +145,9 @@ export const useWorkRecordStore = create<WorkRecordState>()(
           onSuccess: () => {
             Toast.success('提交成功')
           },
-          onError: (errMessage) => {
-            Toast.fail(parseMessage(errMessage))
-          }
+          // onError: (errMessage) => {
+          //   Toast.fail(parseMessage(errMessage))
+          // }
         })
       },
       
